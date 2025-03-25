@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FaCity, FaHouseUser, FaMapPin } from "react-icons/fa";
 import { HiMiniMapPin } from "react-icons/hi2";
 import { LuMapPinHouse } from "react-icons/lu";
@@ -6,11 +7,11 @@ import { RiMapPinUserFill } from "react-icons/ri";
 
 export function DataCard() {
   return (
-    <div className="card h-auto shadow-lg duration-300 transition ease-in-out hover:scale-105 cursor-pointer border border-gray-200 text-gray-900 rounded-xl hover:bg-gradient-to-r from-red-600 to-rose-600 hover:text-white bg-gray-50">
+    <div className="card w-xs min-h-auto shadow-md duration-200 transition ease-in-out hover:scale-105 cursor-pointer border border-gray-200 text-gray-900 rounded-xl hover:bg-gradient-to-r from-red-600 to-rose-600 hover:text-white bg-gray-50">
       <header className="card-header p-4">
         <div className="card-title flex gap-1">
           <FaMapPin size={28} />
-          <h2 className="font-bold text-3xl flex gap-2 items-center">
+          <h2 className="font-bold text-2xl flex gap-2 items-center">
             Rio de Janeiro, RJ
           </h2>
         </div>
@@ -38,7 +39,8 @@ export function DataCard() {
       <footer className="border-t border-gray-200">
         <div>
           <h1 className="text-sm p-2 rounded-md">
-            Criado em {new Date().toLocaleString()}
+            Criado em {new Date().toLocaleDateString("pt-BR")} às{" "}
+            {new Date().toLocaleTimeString("pt-BR")}
           </h1>
         </div>
       </footer>
