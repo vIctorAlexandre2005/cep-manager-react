@@ -39,8 +39,7 @@ export function DataCard() {
       <footer className="border-t border-gray-200">
         <div>
           <h1 className="text-sm p-2 rounded-md">
-            Criado em {new Date().toLocaleDateString("pt-BR")} às{" "}
-            {new Date().toLocaleTimeString("pt-BR")}
+            Criado em {new Date().toLocaleDateString("pt-BR")}
           </h1>
         </div>
       </footer>
