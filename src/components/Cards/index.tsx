@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FaCity, FaHouseUser, FaMapPin } from "react-icons/fa";
 import { HiMiniMapPin } from "react-icons/hi2";
 import { LuMapPinHouse } from "react-icons/lu";
-import { PiCityBold } from "react-icons/pi";
+import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 import { RiMapPinUserFill } from "react-icons/ri";
 
 export function DataCard() {
@@ -21,6 +21,10 @@ export function DataCard() {
         <h1 className="text-lg font-semibold flex gap-1.5 items-center">
           <RiMapPinUserFill size={24} />
           Nome: João
+        </h1>
+        <h1 className="text-lg font-semibold flex gap-1.5 items-center">
+          <PiIdentificationCardFill size={24} />
+          CPF: 000.123.789-45
         </h1>
         <h1 className="text-lg font-semibold flex gap-1.5 items-center">
           <LuMapPinHouse size={24} />
