@@ -1,7 +1,5 @@
 import { LocationsProps } from "@/utils/mockAddress";
-import { useEffect } from "react";
-import { FaCity, FaHouseUser, FaMapPin } from "react-icons/fa";
-import { HiMiniMapPin } from "react-icons/hi2";
+import { FaCity, FaMapPin } from "react-icons/fa";
 import { LuMapPinHouse } from "react-icons/lu";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 import { RiMapPinUserFill } from "react-icons/ri";
