@@ -6,6 +6,7 @@ import { TbMapPinHeart } from "react-icons/tb";
 import { AddressModalContent } from "@/components/Address/Dialogs/AddressModalContent";
 import { locations } from "@/utils/mockAddress";
 import { FaArrowDownLong } from "react-icons/fa6";
+import { Fragment } from "react";
 
 export default function Home() {
   return (
@@ -30,16 +31,18 @@ export default function Home() {
           trigger={
             <div className="w-auto grid grid-cols-4 gap-4">
               {locations.map((location) => (
-                <CardWithAddressDetails
-                  cep={location.cep}
-                  city={location.city}
-                  cpf={location.cpf}
-                  district={location.district}
-                  id={location.id}
-                  logradouro={location.logradouro}
-                  name={location.name}
-                  uf={location.uf}
-                />
+                <Fragment key={location.id}>
+                  <CardWithAddressDetails
+                    cep={location.cep}
+                    city={location.city}
+                    cpf={location.cpf}
+                    district={location.district}
+                    id={location.id}
+                    logradouro={location.logradouro}
+                    name={location.name}
+                    uf={location.uf}
+                  />
+                </Fragment>
               ))}
             </div>
           }
