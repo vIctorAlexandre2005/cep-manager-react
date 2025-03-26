@@ -16,17 +16,14 @@ export function CreateAddress() {
     name,
     cpf,
     cep,
-    street,
-    district,
-    city,
-    uf 
+    address,
   } = useAddress();
 
   return (
     <ModalComponent
       title="Criar novo endereço"
       onToDeny={() => {}}
-      onConfirm={() => sendAddress(name, cpf, cep, street, district, city, uf)}
+      onConfirm={() => sendAddress(name, cpf, cep, address?.logradouro, address?.bairro, address?.localidade, address?.uf)}
       trigger={
         <ButtonComponent
           className="bg-red-500 rounded-lg p-2 text-xl text-white font-semibold"

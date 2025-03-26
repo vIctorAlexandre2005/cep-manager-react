@@ -47,14 +47,6 @@ export function CardWithAddressDetails({
           Bairro: {district}
         </h1>
       </div>
-
-      <footer className="border-t border-gray-200">
-        <div>
-          <h1 className="text-base font-semibold text-left p-2 rounded-md">
-            Criado em {new Date().toLocaleDateString("pt-BR")}
-          </h1>
-        </div>
-      </footer>
     </div>
   );
 }
