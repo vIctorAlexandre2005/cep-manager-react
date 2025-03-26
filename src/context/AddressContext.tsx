@@ -18,10 +18,6 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
 
   // Endereço
   const [cep, setCep] = useState("");
-  const [street, setStreet] = useState(""); // logradouro
-  const [district, setDistrict] = useState(""); // bairro
-  const [city, setCity] = useState("");
-  const [uf, setUf] = useState("");
   return (
     <AddressProvider.Provider
       value={{
@@ -33,18 +29,10 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
         setAddress,
         cep,
         setCep,
-        city,
-        setCity,
         cpf,
         setCpf,
-        district,
-        setDistrict,
         name,
         setName,
-        street,
-        setStreet,
-        uf,
-        setUf,
       }}
     >
       {children}

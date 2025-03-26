@@ -1,42 +1,51 @@
 import { useContextAddress } from "@/context/AddressContext";
 import { searchAddressService } from "@/services/address";
 import { useEffect } from "react";
+import { useQuery } from "react-query";
 
 export function useAddress() {
   const {
-    error,
-    setError,
-    loading,
-    setLoading,
-    address,
+    name,
+    setName,
     setAddress,
     cep,
     setCep,
-    city,
-    setCity,
     cpf,
     setCpf,
-    district,
-    setDistrict,
-    name,
-    setName,
-    street,
-    setStreet,
-    uf,
-    setUf,
+    error,
+    setError,
   } = useContextAddress();
 
-  async function searchAddress(cep: string) {
+  const { data: addressData, isLoading } = useQuery(
+    ["address", cep],
+    () => searchAddressService(cep),
+    {
+      enabled: cep?.length === 8,
+      retry: false,
+      onSuccess: (data) => {
+        if (data?.erro === "true") {
+          setError(true);
+        } else {
+          setError(false);
+          setAddress(data);
+        }
+      },
+    }
+  );
+
+  {
+    /* 
+    async function searchAddress(cep: string) {
     if (cep?.length === 8) {
       try {
         setLoading(true);
         const response = await searchAddressService(cep);
         console.log("response SEARCHADDRESS", response);
-        if (response?.erro === 'true') {
-            setError(true);
+        if (response?.erro === "true") {
+          setError(true);
         } else {
-            setError(false);
-        };
+          setError(false);
+        }
         setAddress(response);
         setCity(response?.localidade);
         setUf(response?.uf);
@@ -47,8 +56,10 @@ export function useAddress() {
       } finally {
         setLoading(false);
       }
-    };
-  };
+    }
+  }
+    */
+  }
 
   function sendAddress(
     name: string,
@@ -71,33 +82,20 @@ export function useAddress() {
       };
       console.log("O que está sendo salvo:", newAddress);
     } catch (error) {
-      console.log("Erro na função sendAddress:", error);
+      console.error("Erro na função sendAddress:", error);
     }
   }
 
-  useEffect(() => {
-    searchAddress(cep);
-  }, [cep, city, street, district, uf, error]);
-
   return {
-    address,
-    setAddress,
-    cep,
-    setCep,
-    city,
-    setCity,
-    cpf,
-    setCpf,
-    district,
-    setDistrict,
+    address: addressData,
+    error,
+    loading: isLoading,
     name,
     setName,
-    street,
-    setStreet,
-    uf,
-    setUf,
+    cep,
+    setCep,
+    cpf,
+    setCpf,
     sendAddress,
-    loading,
-    error,
   };
 }

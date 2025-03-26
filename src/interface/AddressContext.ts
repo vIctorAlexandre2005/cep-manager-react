@@ -24,14 +24,6 @@ export interface AddressData {
     setCpf: React.Dispatch<React.SetStateAction<string>>;
     cep: string;
     setCep: React.Dispatch<React.SetStateAction<string>>;
-    street: string;
-    setStreet: React.Dispatch<React.SetStateAction<string>>;
-    district: string;
-    setDistrict: React.Dispatch<React.SetStateAction<string>>;
-    city: string;
-    setCity: React.Dispatch<React.SetStateAction<string>>;
-    uf: string;
-    setUf: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const defaultValueContextAddress: AddressData = {
@@ -47,12 +39,4 @@ export const defaultValueContextAddress: AddressData = {
     setCpf: () => {},
     cep: '',
     setCep: () => {},
-    street: '',
-    setStreet: () => {},
-    district: '',
-    setDistrict: () => {},
-    city: '',
-    setCity: () => {},
-    uf: '',
-    setUf: () => {},
 };

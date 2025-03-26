@@ -9,6 +9,7 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 export function AddressModalContent() {
   const {
     error,
+    address,
     loading,
     name,
     setName,
@@ -16,14 +17,6 @@ export function AddressModalContent() {
     setCpf,
     cep,
     setCep,
-    city,
-    setCity,
-    district,
-    setDistrict,
-    street,
-    setStreet,
-    uf,
-    setUf,
   } = useAddress();
 
   return (
@@ -61,12 +54,11 @@ export function AddressModalContent() {
             placeholder="Preencha seu CEP, ex: 00000-000"
             icon={<FaMapMarkedAlt size={24} />}
             loading={loading}
-            error={error}
+            error={error as any}
             textError="Endereço não encontrado!"
           />
           <InputComponent
-            value={city}
-            onChange={(event) => setCity(event.target.value)}
+            value={address?.logradouro}
             type="text"
             label="Logradouro"
             placeholder="Avenida Afonso Pena"
@@ -74,8 +66,7 @@ export function AddressModalContent() {
             disable={true}
           />
           <InputComponent
-            value={street}
-            onChange={(event) => setStreet(event.target.value)}
+            value={address?.bairro}
             type="text"
             label="Bairro"
             placeholder="Pechincha"
@@ -83,8 +74,7 @@ export function AddressModalContent() {
             disable={true}
           />
           <InputComponent
-            value={district}
-            onChange={(event) => setDistrict(event.target.value)}
+            value={address?.localidade}
             type="text"
             label="Cidade"
             placeholder="Niterói"
@@ -92,8 +82,7 @@ export function AddressModalContent() {
             disable={true}
           />
           <InputComponent
-            value={uf}
-            onChange={(event) => setUf(event.target.value)}
+            value={address?.uf}
             type="text"
             label="UF"
             placeholder="RJ"
