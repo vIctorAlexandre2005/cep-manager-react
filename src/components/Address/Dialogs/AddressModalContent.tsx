@@ -1,26 +1,13 @@
-import { FaCircleUser } from "react-icons/fa6";
-import { InputComponent } from "../common/InputComponent";
-import { ModalComponent } from "../common/ModalComponent";
-import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
+import { InputComponent } from "@/components/common/InputComponent";
 import { FaCity, FaMapMarkedAlt } from "react-icons/fa";
-import { MdOutlineMapsHomeWork } from "react-icons/md";
+import { FaCircleUser } from "react-icons/fa6";
 import { GiBrazil } from "react-icons/gi";
-import { ButtonComponent } from "../common/Button";
-import { LuMapPinPlus } from "react-icons/lu";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
+import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
-export function CreateAddress() {
+export function AddressModalContent() {
   return (
-    <ModalComponent
-      title="Criar novo endereço"
-      onConfirm={() => console.log("Endereço salvo!")}
-      trigger={
-        <ButtonComponent
-          className="bg-red-500 rounded-lg p-2 text-lg text-white font-semibold"
-          icon={<LuMapPinPlus size={24} />}
-          text="Adicionar novo endereço"
-        />
-      }
-    >
+    <>
       <h1 className="text-2xl font-semibold">Dados pessoais</h1>
       <div className="w-full mb-4">
         <div className="flex items-center gap-4">
@@ -78,6 +65,6 @@ export function CreateAddress() {
           />
         </div>
       </div>
-    </ModalComponent>
+    </>
   );
 }

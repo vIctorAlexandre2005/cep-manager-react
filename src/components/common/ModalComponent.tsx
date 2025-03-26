@@ -14,6 +14,7 @@ interface ModalProps {
   title: string;
   trigger: ReactNode;
   children: ReactNode;
+  textPositiveButton?: string;
   onConfirm: () => void;
 }
 
@@ -21,6 +22,7 @@ export const ModalComponent = ({
   title,
   trigger,
   children,
+  textPositiveButton,
   onConfirm,
 }: ModalProps) => {
   return (
@@ -33,7 +35,7 @@ export const ModalComponent = ({
         {children}
         <DialogFooter>
           <NegativeButton text="Cancelar" onClick={() => {}} />
-          <PositiveButton text="Salvar" onClick={() => {}} />
+          <PositiveButton text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={() => {}} />
         </DialogFooter>
       </DialogContent>
     </Dialog>
