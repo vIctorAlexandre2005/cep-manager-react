@@ -8,12 +8,25 @@ import { GiBrazil } from "react-icons/gi";
 import { ButtonComponent } from "../../../common/Button";
 import { LuMapPinPlus } from "react-icons/lu";
 import { AddressModalContent } from "../AddressModalContent";
+import { useAddress } from "@/hook/useAddress";
 
 export function CreateAddress() {
+  const { 
+    sendAddress,
+    name,
+    cpf,
+    cep,
+    street,
+    district,
+    city,
+    uf 
+  } = useAddress();
+
   return (
     <ModalComponent
       title="Criar novo endereço"
-      onConfirm={() => console.log("Endereço salvo!")}
+      onToDeny={() => {}}
+      onConfirm={() => sendAddress(name, cpf, cep, street, district, city, uf)}
       trigger={
         <ButtonComponent
           className="bg-red-500 rounded-lg p-2 text-xl text-white font-semibold"

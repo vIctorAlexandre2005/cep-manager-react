@@ -20,6 +20,27 @@ export function useAddress() {
     setUf,
   } = useContextAddress();
 
+  function sendAddress(
+    name: string,
+    cpf: string,
+    cep: string,
+    street: string,
+    district: string,
+    city: string,
+    uf: string
+  ) {
+    const newAddress = {
+      name: name,
+      cpf: cpf,
+      cep: cep,
+      street: street,
+      district: district,
+      city: city,
+      uf: uf,
+    };
+    console.log("O que está sendo salvo:", newAddress);
+  };
+
   return {
     address,
     setAddress,
@@ -36,6 +57,7 @@ export function useAddress() {
     street,
     setStreet,
     uf,
-    setUf
+    setUf,
+    sendAddress
   };
 }

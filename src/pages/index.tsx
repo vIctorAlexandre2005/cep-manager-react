@@ -27,6 +27,7 @@ export default function Home() {
         </h1>
 
         <ModalComponent
+          onToDeny={() => {}}
           title="Alterar endereço"
           trigger={
             <div className="w-auto grid grid-cols-4 gap-4">

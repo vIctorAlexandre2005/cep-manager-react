@@ -15,6 +15,7 @@ interface ModalProps {
   trigger: ReactNode;
   children: ReactNode;
   textPositiveButton?: string;
+  onToDeny: () => void;
   onConfirm: () => void;
 }
 
@@ -23,6 +24,7 @@ export const ModalComponent = ({
   trigger,
   children,
   textPositiveButton,
+  onToDeny,
   onConfirm,
 }: ModalProps) => {
   return (
@@ -34,8 +36,8 @@ export const ModalComponent = ({
         </DialogHeader>
         {children}
         <DialogFooter>
-          <NegativeButton text="Cancelar" onClick={() => {}} />
-          <PositiveButton text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={() => {}} />
+          <NegativeButton text="Cancelar" onClick={onToDeny} />
+          <PositiveButton text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={onConfirm} />
         </DialogFooter>
       </DialogContent>
     </Dialog>
