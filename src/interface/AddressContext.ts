@@ -12,6 +12,8 @@ export interface AddressProviderProps {
 }
 
 export interface AddressData {
+    loading: boolean;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     address: AddressProviderProps[];
     setAddress: Dispatch<React.SetStateAction<AddressProviderProps[]>>;
     name: string;
@@ -31,6 +33,8 @@ export interface AddressData {
 }
 
 export const defaultValueContextAddress: AddressData = {
+    loading: false,
+    setLoading: () => {},
     address: [],
     setAddress: () => {},
     name: '',

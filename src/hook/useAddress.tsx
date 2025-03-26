@@ -1,7 +1,11 @@
 import { useContextAddress } from "@/context/AddressContext";
+import { searchAddressService } from "@/services/address";
+import { useEffect } from "react";
 
 export function useAddress() {
   const {
+    loading,
+    setLoading,
     address,
     setAddress,
     cep,
@@ -20,6 +24,20 @@ export function useAddress() {
     setUf,
   } = useContextAddress();
 
+  async function searchAddress(cep: string) {
+    if (cep?.length === 8) {
+      try {
+        setLoading(true);
+        const response = await searchAddressService(cep);
+        console.log("response SEARCHADDRESS", response);
+      } catch (error) {
+        console.log("Erro na função searchAddress:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  };
+
   function sendAddress(
     name: string,
     cpf: string,
@@ -29,17 +47,25 @@ export function useAddress() {
     city: string,
     uf: string
   ) {
-    const newAddress = {
-      name: name,
-      cpf: cpf,
-      cep: cep,
-      street: street,
-      district: district,
-      city: city,
-      uf: uf,
-    };
-    console.log("O que está sendo salvo:", newAddress);
-  };
+    try {
+      const newAddress = {
+        name: name,
+        cpf: cpf,
+        cep: cep,
+        street: street,
+        district: district,
+        city: city,
+        uf: uf,
+      };
+      console.log("O que está sendo salvo:", newAddress);
+    } catch (error) {
+      console.log("Erro na função sendAddress:", error);
+    }
+  }
+
+  useEffect(() => {
+    searchAddress(cep);
+  }, [cep]);
 
   return {
     address,
@@ -58,6 +84,6 @@ export function useAddress() {
     setStreet,
     uf,
     setUf,
-    sendAddress
+    sendAddress,
   };
 }
