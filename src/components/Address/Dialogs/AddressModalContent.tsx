@@ -8,6 +8,7 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
 export function AddressModalContent() {
   const {
+    loading,
     name,
     setName,
     cpf,
@@ -54,10 +55,11 @@ export function AddressModalContent() {
           <InputComponent
             value={cep}
             onChange={(event) => setCep(event.target.value)}
-            type="text"
+            type="number"
             label="CEP"
             placeholder="Preencha seu CEP, ex: 00000-000"
             icon={<FaMapMarkedAlt size={24} />}
+            loading={loading}
           />
           <InputComponent
             value={city}

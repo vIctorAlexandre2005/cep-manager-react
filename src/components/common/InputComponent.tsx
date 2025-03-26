@@ -1,9 +1,11 @@
 import { InputHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils"; // Função para concatenar classes CSS dinamicamente
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { BarLoader } from "react-spinners";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  loading?: boolean;
   minLength?: number;
   maxLength?: number;
   disable?: boolean;
@@ -20,6 +22,7 @@ export const InputComponent = ({
   icon,
   error,
   className,
+  loading,
   ...props
 }: InputProps) => {
   return (
@@ -44,7 +47,7 @@ export const InputComponent = ({
           maxLength={maxLength}
           readOnly={disable}
           className={cn(
-            "w-full bg-transparent text-lg outline-none focus:outline-none p-1 appearance-none text-gray-900",
+            "w-full bg-transparent text-lg font-bold outline-none focus:outline-none p-1 appearance-none text-gray-900",
             icon ? "pl-10" : "pl-3",
             error ? "border-red-500 text-red-500" : "border-gray-300",
             disable ? "cursor-not-allowed" : "",
@@ -53,9 +56,9 @@ export const InputComponent = ({
           {...props}
         />
       </div>
-      {error && (
+      {loading && (
         <span className="text-red-500 text-sm flex items-center gap-1 mt-1">
-          <AiOutlineExclamationCircle /> {error}
+          Buscando endereço... <BarLoader color="red" />
         </span>
       )}
     </div>

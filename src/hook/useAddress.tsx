@@ -30,6 +30,11 @@ export function useAddress() {
         setLoading(true);
         const response = await searchAddressService(cep);
         console.log("response SEARCHADDRESS", response);
+        setAddress(response);
+        setCity(response?.localidade);
+        setUf(response?.uf);
+        setStreet(response?.logradouro);
+        setDistrict(response?.bairro);
       } catch (error) {
         console.log("Erro na função searchAddress:", error);
       } finally {
@@ -65,7 +70,7 @@ export function useAddress() {
 
   useEffect(() => {
     searchAddress(cep);
-  }, [cep]);
+  }, [cep, city, street, district, uf]);
 
   return {
     address,
@@ -85,5 +90,6 @@ export function useAddress() {
     uf,
     setUf,
     sendAddress,
+    loading,
   };
 }
