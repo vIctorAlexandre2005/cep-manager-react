@@ -1,16 +1,21 @@
-import { DataCard } from "@/components/Address/Cards";
+import { CardWithAddressDetails } from "@/components/Address/Cards";
 import { ModalComponent } from "@/components/common/ModalComponent";
 import { CreateAddress } from "@/components/Address/Dialogs/createAddress/CreateAddress";
 import Image from "next/image";
 import { TbMapPinHeart } from "react-icons/tb";
 import { AddressModalContent } from "@/components/Address/Dialogs/AddressModalContent";
 import { locations } from "@/utils/mockAddress";
+import { FaArrowDownLong } from "react-icons/fa6";
 
 export default function Home() {
   return (
     <div className="flex mt-24 flex-col overflow-auto">
       <div className="flex justify-center items-center flex-col gap-4">
         <Image src="/map.svg" alt="Imagem do mapa" width={250} height={250} />
+        <FaArrowDownLong
+          size={28}
+          className="animate-infinite animate-bounce text-slate-700"
+        />
         <CreateAddress />
       </div>
 
@@ -25,7 +30,7 @@ export default function Home() {
           trigger={
             <div className="w-auto grid grid-cols-4 gap-4">
               {locations.map((location) => (
-                <DataCard
+                <CardWithAddressDetails
                   cep={location.cep}
                   city={location.city}
                   cpf={location.cpf}

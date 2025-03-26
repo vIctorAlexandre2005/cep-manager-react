@@ -6,7 +6,7 @@ import { LuMapPinHouse } from "react-icons/lu";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 import { RiMapPinUserFill } from "react-icons/ri";
 
-export function DataCard({
+export function CardWithAddressDetails({
   cep,
   city,
   cpf,
@@ -52,7 +52,7 @@ export function DataCard({
 
       <footer className="border-t border-gray-200">
         <div>
-          <h1 className="text-sm p-2 rounded-md">
+          <h1 className="text-base font-semibold text-left p-2 rounded-md">
             Criado em {new Date().toLocaleDateString("pt-BR")}
           </h1>
         </div>
