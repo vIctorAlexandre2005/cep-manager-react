@@ -38,19 +38,18 @@ export default function Home() {
           <TbMapPinHeart size={34} color="rgb(239 68 70)" />
         </h1>
         <div className="w-auto grid grid-cols-5 gap-4">
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
-          <DataCard />
+          <ModalComponent 
+            title="Teste"
+            trigger={<DataCard />}
+            onConfirm={() => {}}
+          >
+            <InputComponent
+            type="text"
+            label="CEP"
+            placeholder="Preencha seu CEP, ex: 00000-000"
+            icon={<FaMapMarkedAlt size={24} />}
+          />
+          </ModalComponent>
         </div>
       </div>
     </div>

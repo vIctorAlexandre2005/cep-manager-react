@@ -12,28 +12,20 @@ import { ButtonComponent, NegativeButton, PositiveButton } from "./Button";
 
 interface ModalProps {
   title: string;
-  triggerText: string;
-  triggerIcon?: ReactNode;
+  trigger: ReactNode;
   children: ReactNode;
   onConfirm: () => void;
 }
 
 export const ModalComponent = ({
   title,
-  triggerText,
-  triggerIcon,
+  trigger,
   children,
   onConfirm,
 }: ModalProps) => {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <ButtonComponent
-          className="bg-red-500 rounded-lg p-2 text-lg text-white font-semibold w-1/5"
-          text={triggerText}
-          icon={triggerIcon as any}
-        />
-      </DialogTrigger>
+      <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px] xl:max-w-[800px]">
         <DialogHeader>
           <DialogTitle className="text-3xl font-bold">{title}</DialogTitle>

@@ -35,19 +35,19 @@ export const InputComponent = ({
           error
             ? "border-red-500"
             : "border-gray-400 hover:border-red-400 focus-within:border-red-500",
-            disable ? "cursor-not-allowed opacity-50" : ''
+          disable ? "cursor-not-allowed opacity-60" : ""
         )}
       >
         {icon && <span className="absolute left-3 text-gray-500">{icon}</span>}
         <input
           minLength={minLength}
           maxLength={maxLength}
-          disabled={disable}
+          readOnly={disable}
           className={cn(
-            "w-full bg-transparent text-lg outline-none focus:outline-none p-1 appearance-none text-gray-800",
+            "w-full bg-transparent text-lg outline-none focus:outline-none p-1 appearance-none text-gray-900",
             icon ? "pl-10" : "pl-3",
             error ? "border-red-500 text-red-500" : "border-gray-300",
-            disable ? "cursor-not-allowed" : '',
+            disable ? "cursor-not-allowed" : "",
             className
           )}
           {...props}

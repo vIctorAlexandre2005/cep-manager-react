@@ -5,13 +5,21 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 import { FaCity, FaMapMarkedAlt } from "react-icons/fa";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { GiBrazil } from "react-icons/gi";
+import { ButtonComponent } from "../common/Button";
+import { LuMapPinPlus } from "react-icons/lu";
 
 export function CreateAddress() {
   return (
     <ModalComponent
       title="Criar novo endereço"
-      triggerText="Adicionar novo endereço"
       onConfirm={() => console.log("Endereço salvo!")}
+      trigger={
+        <ButtonComponent
+          className="bg-red-500 rounded-lg p-2 text-lg text-white font-semibold"
+          icon={<LuMapPinPlus size={24} />}
+          text="Adicionar novo endereço"
+        />
+      }
     >
       <h1 className="text-2xl font-semibold">Dados pessoais</h1>
       <div className="w-full mb-4">
