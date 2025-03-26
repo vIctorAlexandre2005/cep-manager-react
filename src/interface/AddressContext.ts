@@ -12,6 +12,8 @@ export interface AddressProviderProps {
 }
 
 export interface AddressData {
+    error: boolean;
+    setError: React.Dispatch<React.SetStateAction<boolean>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     address: AddressProviderProps[];
@@ -33,6 +35,8 @@ export interface AddressData {
 }
 
 export const defaultValueContextAddress: AddressData = {
+    error: false,
+    setError: () => {},
     loading: false,
     setLoading: () => {},
     address: [],

@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 export function useAddress() {
   const {
+    error,
+    setError,
     loading,
     setLoading,
     address,
@@ -30,6 +32,11 @@ export function useAddress() {
         setLoading(true);
         const response = await searchAddressService(cep);
         console.log("response SEARCHADDRESS", response);
+        if (response?.erro === 'true') {
+            setError(true);
+        } else {
+            setError(false);
+        };
         setAddress(response);
         setCity(response?.localidade);
         setUf(response?.uf);
@@ -70,7 +77,7 @@ export function useAddress() {
 
   useEffect(() => {
     searchAddress(cep);
-  }, [cep, city, street, district, uf]);
+  }, [cep, city, street, district, uf, error]);
 
   return {
     address,
@@ -91,5 +98,6 @@ export function useAddress() {
     setUf,
     sendAddress,
     loading,
+    error,
   };
 }

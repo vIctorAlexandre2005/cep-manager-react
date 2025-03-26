@@ -9,7 +9,8 @@ const AddressProvider = createContext<AddressData>(defaultValueContextAddress);
 
 const AddressContext = ({ children }: { children: ReactNode }) => {
   const [address, setAddress] = useState<AddressProviderProps[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   // Dados pessoais
   const [name, setName] = useState("");
@@ -24,6 +25,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   return (
     <AddressProvider.Provider
       value={{
+        error,
+        setError,
         loading,
         setLoading,
         address,

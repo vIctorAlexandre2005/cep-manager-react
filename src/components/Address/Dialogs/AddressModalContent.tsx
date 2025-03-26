@@ -8,6 +8,7 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
 export function AddressModalContent() {
   const {
+    error,
     loading,
     name,
     setName,
@@ -60,6 +61,8 @@ export function AddressModalContent() {
             placeholder="Preencha seu CEP, ex: 00000-000"
             icon={<FaMapMarkedAlt size={24} />}
             loading={loading}
+            error={error}
+            textError="Endereço não encontrado!"
           />
           <InputComponent
             value={city}
