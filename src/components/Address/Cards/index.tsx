@@ -26,8 +26,8 @@ export function CardWithAddressDetails({
           </h2>
         </div>
         <img
-          src={"./cityToCard.jpg"}
-          className="w-full h-36 object-cover rounded-t-xl hover:backdrop-opacity-45"
+          src={"/cityToCard.jpg"}
+          className="w-full h-44 object-cover rounded-t-xl hover:backdrop-opacity-45"
           alt="Background"
         />
       </header>

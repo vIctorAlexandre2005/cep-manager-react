@@ -36,6 +36,7 @@ export function PositiveButton({ text, onClick }: ButtonProps) {
   return (
     <button
       onClick={onClick}
+      type="submit"
       className="transition duration-200 gap-2 cursor-pointer hover:opacity-80 p-2 flex justify-center text-center items-center bg-red-500 rounded-md text-lg text-white font-semibold w-1/5"
     >
       {text}

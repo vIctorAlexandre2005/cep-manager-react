@@ -7,6 +7,7 @@ import { AddressModalContent } from "@/components/Address/Dialogs/AddressModalCo
 import { locations } from "@/utils/mockAddress";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { Fragment } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -26,7 +27,7 @@ export default function Home() {
           <TbMapPinHeart size={34} color="rgb(239 68 70)" />
         </h1>
 
-        {locations?.length === 10 ? (
+        {locations?.length === 0 ? (
           <div className="flex justify-center opacity-90 items-center flex-col">
             <Image src={"/world.svg"} width={320} height={320} alt="" />
             <h1 className="font-semibold text-2xl">

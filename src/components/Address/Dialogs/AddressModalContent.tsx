@@ -7,17 +7,8 @@ import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
 export function AddressModalContent() {
-  const {
-    error,
-    address,
-    loading,
-    name,
-    setName,
-    cpf,
-    setCpf,
-    cep,
-    setCep,
-  } = useAddress();
+  const { error, address, loading, name, setName, cpf, setCpf, cep, setCep } =
+    useAddress();
 
   return (
     <>
@@ -31,6 +22,7 @@ export function AddressModalContent() {
             label="Nome"
             placeholder="Digite seu nome"
             icon={<FaCircleUser size={24} />}
+            required
           />
           <InputComponent
             value={cpf}
@@ -39,6 +31,7 @@ export function AddressModalContent() {
             label="CPF"
             placeholder="Digite sua senha"
             icon={<PiIdentificationCardFill size={28} />}
+            required
           />
         </div>
       </div>
@@ -56,6 +49,7 @@ export function AddressModalContent() {
             loading={loading}
             error={error as any}
             textError="Endereço não encontrado!"
+            required
           />
           <InputComponent
             value={address?.logradouro}
@@ -64,6 +58,7 @@ export function AddressModalContent() {
             placeholder="Avenida Afonso Pena"
             icon={<MdOutlineMapsHomeWork size={28} />}
             disable={true}
+            required
           />
           <InputComponent
             value={address?.bairro}
@@ -72,6 +67,7 @@ export function AddressModalContent() {
             placeholder="Pechincha"
             icon={<PiCityBold size={28} />}
             disable={true}
+            required
           />
           <InputComponent
             value={address?.localidade}
@@ -80,6 +76,7 @@ export function AddressModalContent() {
             placeholder="Niterói"
             icon={<FaCity size={28} />}
             disable={true}
+            required
           />
           <InputComponent
             value={address?.uf}
@@ -88,6 +85,7 @@ export function AddressModalContent() {
             placeholder="RJ"
             icon={<GiBrazil size={28} />}
             disable={true}
+            required
           />
         </div>
       </div>
