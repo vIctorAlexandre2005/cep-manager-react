@@ -1,40 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🚀 Desafio Técnico - Frontend
 
-## Getting Started
+## 📌 Sobre o Projeto
+Este projeto foi desenvolvido como parte de um desafio técnico para a **Solution TI**, demonstrando habilidades em React, Next.js e integração com APIs. A proposta envolvia a criação de um sistema de cadastro de endereços com preenchimento automático e validação de dados.
 
-First, run the development server:
+🔹 **Tecnologias Utilizadas:**
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Query](https://tanstack.com/query/latest)
+- [Axios](https://axios-http.com/)
+- [shadCN UI](https://ui.shadcn.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 
+## 🎯 Funcionalidades
+✅ Campo para inserir CEP<br>
+✅ Preenchimento automático dos campos de endereço via [API ViaCEP](https://viacep.com.br/)<br>
+✅ Validação de CPF e campos obrigatórios<br>
+✅ Listagem de endereços salvos<br>
+✅ Edição e exclusão de endereços<br>
+✅ Comunicação com backend via API<br>
+✅ Interface responsiva e moderna<br>
+
+## 📦 Como Rodar o Projeto
+
+### 🔹 Pré-requisitos
+Certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+
+### 🚀 Instalação e Execução
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone este repositório
+$ git clone https://github.com/seu-usuario/nome-do-repo.git
+
+# Acesse a pasta do projeto
+$ cd cep-manager-react
+
+# Instale as dependências
+$ yarn install
+
+# Inicie a aplicação
+$ yarn dev
+```
+O projeto estará disponível rodando localmente (**http://localhost:3000**).
+
+## 🔄 Integração com Backend
+Este frontend se comunica com a versão backend do projeto. Certifique-se de que a API está rodando para testar todas as funcionalidades. O backend pode ser encontrado [aqui](https://github.com/vIctorAlexandre2005/cep-manager-java).
+
+## 🛠️ Estrutura do Projeto
+```bash
+/src
+ ├── components/      # Componentes reutilizáveis
+ ├── pages/           # Páginas da aplicação
+ ├── services/        # Configuração de APIs (Axios)
+ ├── context/         # Gerenciamento de estado global
+ ├── hooks/           # Hooks customizados
+ ├── styles/          # Estilos globais
+ └── utils/           # Funções utilitárias
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📜 Licença
+Este projeto está sob a licença MIT.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+💡 *Desenvolvido com ❤️ por [Victor Alexandre](https://github.com/vIctorAlexandre2005)*
