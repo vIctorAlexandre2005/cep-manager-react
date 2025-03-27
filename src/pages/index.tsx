@@ -26,33 +26,42 @@ export default function Home() {
           <TbMapPinHeart size={34} color="rgb(239 68 70)" />
         </h1>
 
-        <ModalComponent
-          onToDeny={() => {}}
-          title="Alterar endereço"
-          trigger={
-            <div className="w-auto grid grid-cols-4 gap-4">
-              {locations.map((location) => (
-                <Fragment key={location.id}>
-                  <CardWithAddressDetails
-                    cep={location.cep}
-                    city={location.city}
-                    cpf={location.cpf}
-                    district={location.district}
-                    id={location.id}
-                    logradouro={location.logradouro}
-                    name={location.name}
-                    uf={location.uf}
-                  />
-                </Fragment>
-              ))}
-            </div>
-          }
-          onConfirm={() => {}}
-          textPositiveButton="Atualizar"
-        >
-          <AddressModalContent />
-        </ModalComponent>
+        {locations?.length === 10 ? (
+          <div className="flex justify-center opacity-90 items-center flex-col">
+            <Image src={"/world.svg"} width={320} height={320} alt="" />
+            <h1 className="font-semibold text-2xl">
+              Espalhe seus endereços pelo mundo!
+            </h1>
+          </div>
+        ) : (
+          <ModalComponent
+            onToDeny={() => {}}
+            title="Alterar endereço"
+            trigger={
+              <div className="w-auto grid grid-cols-4 gap-4">
+                {locations.map((location) => (
+                  <Fragment key={location.id}>
+                    <CardWithAddressDetails
+                      cep={location.cep}
+                      city={location.city}
+                      cpf={location.cpf}
+                      district={location.district}
+                      id={location.id}
+                      logradouro={location.logradouro}
+                      name={location.name}
+                      uf={location.uf}
+                    />
+                  </Fragment>
+                ))}
+              </div>
+            }
+            onConfirm={() => {}}
+            textPositiveButton="Atualizar"
+          >
+            <AddressModalContent />
+          </ModalComponent>
+        )}
       </div>
     </div>
   );
-}
+};
