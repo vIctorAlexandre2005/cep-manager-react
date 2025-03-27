@@ -32,14 +32,22 @@ export default function Home() {
         </h1>
 
         {locations?.length === 0 ? (
-          <div className="flex justify-center opacity-90 items-center flex-col">
+          <div className="flex justify-center items-center opacity-90 flex-col">
             <Image src={"/world.svg"} width={320} height={320} alt="" />
             <h1 className="font-semibold text-2xl">
-              Espalhe seus endereços pelo mundo!
+              Cadastre o seu lugar favorito!
             </h1>
           </div>
         ) : (
-          <div className="w-auto grid grid-cols-4 gap-4">
+          <div className="
+            w-full grid items-start gap-4
+            sm:grid-cols-2 sm:gap-8
+            lg:grid-cols-3
+            xl:grid-cols-4 xl:gap-10 
+            2xl:grid-cols-4 2xl:gap-6 
+            3xl:grid-cols-5
+            "
+          >
             {locations.map((location) => (
               <Fragment key={location.id}>
                 <CardWithAddressDetails
