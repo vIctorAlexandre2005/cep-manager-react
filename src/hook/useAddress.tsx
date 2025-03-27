@@ -19,6 +19,8 @@ export function useAddress() {
     setCpf,
     error,
     setError,
+    updateName,
+    setUpdateName
   } = useContextAddress();
 
   const { data: addressData, isLoading } = useQuery(
@@ -109,5 +111,7 @@ export function useAddress() {
     cpf,
     setCpf,
     sendAddress,
+    updateName,
+    setUpdateName,
   };
 }

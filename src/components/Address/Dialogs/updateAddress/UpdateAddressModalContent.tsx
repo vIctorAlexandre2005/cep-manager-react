@@ -1,5 +1,6 @@
 import { InputComponent } from "@/components/common/InputComponent";
 import { useAddress } from "@/hook/useAddress";
+import { useState } from "react";
 import { FaCity, FaMapMarkedAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiBrazil } from "react-icons/gi";
@@ -7,6 +8,10 @@ import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
 export function UpdateAddressModalContent({ location }: any) {
+
+    const { updateName, setUpdateName } = useAddress();
+
+    const [update, setUpdate] = useState(location.name);
 
     console.log(location.cep.trim());
 
@@ -16,8 +21,8 @@ export function UpdateAddressModalContent({ location }: any) {
       <div className="w-full mb-4">
         <div className="flex items-center gap-4">
           <InputComponent
-            value={location.name}
-            // onChange={(event) => setName(event.target.value)}
+            value={update}
+            onChange={(event) => setUpdate(event.target.value)}
             type="text"
             label="Nome"
             placeholder="Digite seu nome"

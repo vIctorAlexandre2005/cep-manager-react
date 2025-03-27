@@ -19,6 +19,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
 
   // Endereço
   const [cep, setCep] = useState("");
+
+  const [updateName, setUpdateName] = useState(name);
   return (
     <AddressProvider.Provider
       value={{
@@ -36,6 +38,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
         setCpf,
         name,
         setName,
+        updateName,
+        setUpdateName,
       }}
     >
       {children}
