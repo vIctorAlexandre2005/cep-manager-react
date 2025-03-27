@@ -11,6 +11,7 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   const [address, setAddress] = useState<AddressProviderProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<number | undefined | boolean | {}>(false);
 
   // Dados pessoais
   const [name, setName] = useState("");
@@ -21,6 +22,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   return (
     <AddressProvider.Provider
       value={{
+        selectedCard,
+        setSelectedCard,
         error,
         setError,
         loading,

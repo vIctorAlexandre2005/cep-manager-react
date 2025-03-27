@@ -14,14 +14,15 @@ export function CardWithAddressDetails({
   logradouro,
   name,
   uf,
+  onClick,
 }: LocationsProps) {
   return (
-    <div className="card w-sm min-h-auto shadow-md duration-200 transition ease-in-out hover:scale-105 cursor-pointer border border-gray-200 text-gray-900 rounded-xl hover:bg-gradient-to-r from-red-600 to-rose-600 hover:text-white bg-gray-50">
-      <header className="card-header relative">
+    <div onClick={onClick} className="card w-sm min-h-auto shadow-md duration-200 transition ease-in-out hover:scale-105 cursor-pointer border border-gray-200 text-gray-900 rounded-xl hover:bg-gradient-to-r from-red-600 to-rose-600 hover:text-white bg-gray-50">
+      <header className="card-header relative w-full">
         <div className="absolute inset-0 rounded-t-xl bg-black opacity-80"></div>
         <div className="card-title mt-12 text-gray-100 absolute items-center flex justify-center p-4 gap-1 z-10">
           <FaMapPin size={28} />
-          <h2 className="font-bold text-2xl text-center flex gap-2 items-center">
+          <h2 className="font-bold text-2xl text-center justify-center flex gap-2 items-center">
             {city}, {uf}
           </h2>
         </div>

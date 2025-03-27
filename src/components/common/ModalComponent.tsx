@@ -17,6 +17,7 @@ interface ModalProps {
   textPositiveButton?: string;
   onToDeny: () => void;
   onConfirm: () => void;
+  open?: number | boolean | undefined | {};
 }
 
 export const ModalComponent = ({
@@ -26,9 +27,10 @@ export const ModalComponent = ({
   textPositiveButton,
   onToDeny,
   onConfirm,
+  open, 
 }: ModalProps) => {
   return (
-    <Dialog>
+    <Dialog open={open as any}>
       <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px] xl:max-w-[800px]">
         <DialogHeader>

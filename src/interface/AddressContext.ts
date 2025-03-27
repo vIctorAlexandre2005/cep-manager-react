@@ -12,6 +12,8 @@ export interface AddressProviderProps {
 }
 
 export interface AddressData {
+    selectedCard: number | undefined | boolean | {};
+    setSelectedCard: React.Dispatch<React.SetStateAction<number | undefined | boolean | {}>>;
     error: boolean;
     setError: React.Dispatch<React.SetStateAction<boolean>>;
     loading: boolean;
@@ -27,6 +29,8 @@ export interface AddressData {
 }
 
 export const defaultValueContextAddress: AddressData = {
+    selectedCard: false,
+    setSelectedCard: () => {},
     error: false,
     setError: () => {},
     loading: false,

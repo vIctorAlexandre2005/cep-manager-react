@@ -7,7 +7,7 @@ import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { GiBrazil } from "react-icons/gi";
 import { ButtonComponent } from "../../../common/Button";
 import { LuMapPinPlus } from "react-icons/lu";
-import { AddressModalContent } from "../AddressModalContent";
+import { CreateAddressModalContent } from "./CreateAddressModalContent";
 import { useAddress } from "@/hook/useAddress";
 
 export function CreateAddress() {
@@ -32,7 +32,7 @@ export function CreateAddress() {
         />
       }
     >
-      <AddressModalContent />
+      <CreateAddressModalContent />
     </ModalComponent>
   );
 }

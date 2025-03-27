@@ -6,7 +6,7 @@ import { GiBrazil } from "react-icons/gi";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
-export function AddressModalContent() {
+export function CreateAddressModalContent() {
   const { error, address, loading, name, setName, cpf, setCpf, cep, setCep } =
     useAddress();
 

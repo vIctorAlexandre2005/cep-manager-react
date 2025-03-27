@@ -8,6 +8,8 @@ import { toast } from "sonner";
 export function useAddress() {
   const {
     address,
+    selectedCard,
+    setSelectedCard,
     name,
     setName,
     setAddress,
@@ -95,6 +97,8 @@ export function useAddress() {
   }
 
   return {
+    selectedCard,
+    setSelectedCard,
     address: addressData,
     error,
     loading: isLoading,
