@@ -42,7 +42,7 @@ export function PositiveButton({ text, onClick, isLoading }: ButtonProps) {
       type="submit"
       className="transition duration-200 gap-2 cursor-pointer hover:opacity-80 p-2 flex justify-center text-center items-center bg-red-500 rounded-md text-lg text-white font-semibold w-1/5"
     >
-      {isLoading ? <ClipLoader color="white" size={24} /> : ""}  {!isLoading && text && <span>{text}</span>}
+      {isLoading ? <ClipLoader color="white" size={24} /> : <span>{text}</span>}
     </button>
   );
 };

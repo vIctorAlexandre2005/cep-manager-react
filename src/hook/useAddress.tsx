@@ -30,11 +30,19 @@ export function useAddress() {
     setLoading,
   } = useContextAddress();
 
+  const removeFormatting = (value: string) => {
+    return value.replace(/\D/g, ""); // Remove tudo que não for número
+  };
+
+  // Remove a formatação do CPF e do CEP
+  const cleanCpf = removeFormatting(cpf);
+  const cleanZipCode = removeFormatting(zip_code);
+
   const { data: addressData, isLoading } = useQuery(
     ["address", zip_code],
-    () => searchAddressService(zip_code),
+    () => searchAddressService(cleanZipCode),
     {
-      enabled: zip_code?.length === 8,
+      enabled: cleanZipCode?.length === 8,
       retry: false,
       onSuccess: (data) => {
         if (data?.erro === "true") {
@@ -66,7 +74,6 @@ export function useAddress() {
       retry: 2, // Tenta novamente 2 vezes caso ocorra erro
       refetchOnReconnect: true, // Refaz a requisição caso a internet caia e volte
       onError: (error: any) => {
-        toastError("Erro ao buscar endereços");
         console.error("Erro ao buscar os dados", error);
       },
     }
@@ -114,25 +121,29 @@ export function useAddress() {
   ) {
     try {
       setLoading(true);
-      const valid = validDataAddress(name, cpf, zip_code);
+
+      
+
+      // Validação (você pode manter o código de validação aqui)
+      const valid = validDataAddress(name, cleanCpf, cleanZipCode);
       if (valid === null) {
         return;
       } else {
         const data = {
           name: name,
-          cpf: cpf,
+          cpf: cleanCpf,
           address: {
-            zip_code: zip_code,
+            zip_code: cleanZipCode,
             street: street,
             district: district,
             city: city,
             uf: uf,
           },
         };
+
+        console.log("DATA:", data)
+        // Envia os dados sem formatação para o serviço
         createAddressService(data);
-        setZip_code("");
-        setName("");
-        setCpf("");
       }
     } catch (error) {
       toastError("Erro ao enviar dados.");
@@ -159,6 +170,7 @@ export function useAddress() {
     setCpf,
     updateName,
     setUpdateName,
+    cleanZipCode,
     createAddress,
     loading,
   };

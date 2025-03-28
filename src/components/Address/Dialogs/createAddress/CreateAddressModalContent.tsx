@@ -10,11 +10,30 @@ export function CreateAddressModalContent() {
   const { error, address, loading, name, setName, cpf, setCpf, zip_code, setZip_code } =
     useAddress();
 
+    const handleNumberInput = (value: string, maxLength: number) => {
+      return value.replace(/\D/g, "").slice(0, maxLength);
+    };
+  
+    // Formatação de CPF (000.000.000-00)
+    const formatCpf = (value: string) => {
+      value = handleNumberInput(value, 11);
+      return value
+        .replace(/^(\d{3})(\d)/, "$1.$2")
+        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1-$2");
+    };
+  
+    // Formatação de CEP (00000-000)
+    const formatCep = (value: string) => {
+      value = handleNumberInput(value, 8);
+      return value.replace(/^(\d{5})(\d)/, "$1-$2");
+    };
+
   return (
     <>
       <h1 className="text-2xl font-semibold">Dados pessoais</h1>
       <div className="w-full mb-4">
-        <div className="flex items-center gap-4">
+        <div className="flex xs:flex-col sm:flex-row items-center gap-4">
           <InputComponent
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -26,11 +45,12 @@ export function CreateAddressModalContent() {
           />
           <InputComponent
             value={cpf}
-            onChange={(event) => setCpf(event.target.value)}
+            onChange={(event) => setCpf(formatCpf(event.target.value))}
             type="text"
             label="CPF"
-            placeholder="Digite sua senha"
+            placeholder="Digite seu CPF"
             icon={<PiIdentificationCardFill size={28} />}
+            maxLength={14}
             required
           />
         </div>
@@ -38,11 +58,11 @@ export function CreateAddressModalContent() {
 
       <h1 className="text-2xl font-semibold">Dados do endereço</h1>
       <div className="w-full">
-        <div className="grid grid-cols-2 gap-4 w-full">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-4 w-full">
           <InputComponent
             value={zip_code}
-            onChange={(event) => setZip_code(event.target.value)}
-            type="number"
+            onChange={(event) => setZip_code(formatCep(event.target.value))}
+            type="text"
             label="CEP"
             placeholder="Preencha seu CEP, ex: 00000-000"
             icon={<FaMapMarkedAlt size={24} />}
@@ -50,12 +70,13 @@ export function CreateAddressModalContent() {
             error={error as any}
             textError="Endereço não encontrado!"
             required
+            maxLength={9}
           />
           <InputComponent
             value={address?.logradouro}
             type="text"
             label="Logradouro"
-            placeholder="Avenida Afonso Pena"
+            placeholder="Logradouro"
             icon={<MdOutlineMapsHomeWork size={28} />}
             disable={true}
             required
@@ -64,7 +85,7 @@ export function CreateAddressModalContent() {
             value={address?.bairro}
             type="text"
             label="Bairro"
-            placeholder="Pechincha"
+            placeholder="Bairro"
             icon={<PiCityBold size={28} />}
             disable={true}
             required
@@ -73,7 +94,7 @@ export function CreateAddressModalContent() {
             value={address?.localidade}
             type="text"
             label="Cidade"
-            placeholder="Niterói"
+            placeholder="Cidade"
             icon={<FaCity size={28} />}
             disable={true}
             required
@@ -82,7 +103,7 @@ export function CreateAddressModalContent() {
             value={address?.uf}
             type="text"
             label="UF"
-            placeholder="RJ"
+            placeholder="UF"
             icon={<GiBrazil size={28} />}
             disable={true}
             required

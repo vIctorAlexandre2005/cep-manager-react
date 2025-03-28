@@ -31,22 +31,30 @@ export const ModalComponent = ({
   onToDeny,
   onConfirm,
   loading,
-  open, 
+  open,
   classNameTrigger,
   textTrigger,
   iconTrigger,
 }: ModalProps) => {
   return (
     <Dialog open={open as any}>
-      <DialogTrigger className={classNameTrigger}>{textTrigger} {iconTrigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] xl:max-w-[800px]">
+      <DialogTrigger className={classNameTrigger}>
+        {textTrigger} {iconTrigger}
+      </DialogTrigger>
+      <DialogContent className="xs:max-w-[600px] xs:max-h-full flex flex-col md:max-w-[800px] overflow-auto">
         <DialogHeader>
-          <DialogTitle className="text-3xl font-bold">{title}</DialogTitle>
+          <DialogTitle className="text-3xl text-left font-bold">{title}</DialogTitle>
         </DialogHeader>
         {children}
         <DialogFooter>
-          <NegativeButton text="Cancelar" onClick={onToDeny} />
-          <PositiveButton isLoading={loading} text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={onConfirm} />
+          <div className="w-full mt-2 justify-end flex items-center gap-2">
+            <NegativeButton text="Cancelar" onClick={onToDeny} />
+            <PositiveButton
+              isLoading={loading}
+              text={textPositiveButton ? textPositiveButton : "Salvar"}
+              onClick={onConfirm}
+            />
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

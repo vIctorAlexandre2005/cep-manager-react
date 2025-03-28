@@ -30,7 +30,7 @@ export const InputComponent = ({
   loading,
   ...props
 }: InputProps) => {
-  const { zip_code } = useAddress();
+  const { cleanZipCode } = useAddress();
   return (
     <div className="flex flex-col w-full">
       {label && (
@@ -48,17 +48,17 @@ export const InputComponent = ({
         )}
       >
         {icon && <span className="absolute left-3 text-gray-500">{icon}</span>}
-        {zip_code?.length === 8 && loading && (
+        {cleanZipCode?.length === 8 && loading && (
           <span className="absolute right-3 text-gray-500">
             <ClipLoader size={24} color="#EF4444" />
           </span>
         )}
-        {zip_code?.length === 8 && !loading && !error && label === "CEP" && (
+        {cleanZipCode?.length === 8 && !loading && !error && label === "CEP" && (
           <span className="absolute right-3 text-gray-500">
             <FaCircleCheck size={24} color="green" />
           </span>
         )}
-        {zip_code?.length === 8 && error && (
+        {cleanZipCode?.length === 8 && error && (
           <span className="absolute right-3 text-gray-500">
             <LuMapPinX size={24} color="#EF4444" />
           </span>
@@ -77,7 +77,7 @@ export const InputComponent = ({
           {...props}
         />
       </div>
-      {zip_code?.length === 8 && error && (
+      {cleanZipCode?.length === 8 && error && (
         <span className="text-red-500 text-base font-semibold flex items-center gap-1 mt-1">
           {" "}
           {textError}
