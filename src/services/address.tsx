@@ -20,7 +20,7 @@ export async function getAddressService() {
     const data = await response.data;
     return data;
   } catch (error: any) {
-    throw error;
+    throw new Error(error?.response?.data?.error || "Erro ao buscar endereços");
   }
 }
 

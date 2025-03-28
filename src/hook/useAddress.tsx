@@ -47,19 +47,27 @@ export function useAddress() {
     }
   );
 
-  const { data: addressDataList, isLoading: isLoadingList, isError: errorList } = useQuery(
+  const {
+    data: addressDataList,
+    isLoading: isLoadingList,
+    isError: errorList,
+  } = useQuery(
     ["address"],
     () => getAddressService(),
-    
+
     {
       onSuccess: (data) => {
         setAddress(data);
       },
-
-      retry: true,
-
-      onError: (error) => {
-        console.error("error", error);
+      refetchInterval: 120000, // Atualiza a cada 2 minutos
+      refetchOnWindowFocus: false, // Evita refetch automático ao focar na aba
+      staleTime: 60000, // Considera os dados frescos por 1 minuto antes de refazer a busca
+      cacheTime: 300000, // Mantém os dados no cache por 5 minutos antes de serem descartados
+      retry: 2, // Tenta novamente 2 vezes caso ocorra erro
+      refetchOnReconnect: true, // Refaz a requisição caso a internet caia e volte
+      onError: (error: any) => {
+        toastError("Erro ao buscar endereços");
+        console.error("Erro ao buscar os dados", error);
       },
     }
   );
@@ -107,26 +115,25 @@ export function useAddress() {
     try {
       setLoading(true);
       const valid = validDataAddress(name, cpf, zip_code);
-    if (valid === null) {
-      return;
-    } else {
-      
-      const data = {
-        name: name,
-        cpf: cpf,
-        address: {
-          zip_code: zip_code,
-          street: street,
-          district: district,
-          city: city,
-          uf: uf,
-        },
-      };
-      createAddressService(data);
-      setZip_code("");
-      setName("");
-      setCpf("");
-    };
+      if (valid === null) {
+        return;
+      } else {
+        const data = {
+          name: name,
+          cpf: cpf,
+          address: {
+            zip_code: zip_code,
+            street: street,
+            district: district,
+            city: city,
+            uf: uf,
+          },
+        };
+        createAddressService(data);
+        setZip_code("");
+        setName("");
+        setCpf("");
+      }
     } catch (error) {
       toastError("Erro ao enviar dados.");
       console.error(error);
