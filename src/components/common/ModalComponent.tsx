@@ -18,6 +18,7 @@ interface ModalProps {
   onToDeny: () => void;
   onConfirm: () => void;
   open?: number | boolean | undefined | {};
+  loading: boolean;
 }
 
 export const ModalComponent = ({
@@ -27,6 +28,7 @@ export const ModalComponent = ({
   textPositiveButton,
   onToDeny,
   onConfirm,
+  loading,
   open, 
 }: ModalProps) => {
   return (
@@ -39,7 +41,7 @@ export const ModalComponent = ({
         {children}
         <DialogFooter>
           <NegativeButton text="Cancelar" onClick={onToDeny} />
-          <PositiveButton text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={onConfirm} />
+          <PositiveButton isLoading={loading} text={textPositiveButton ? textPositiveButton : "Salvar"} onClick={onConfirm} />
         </DialogFooter>
       </DialogContent>
     </Dialog>

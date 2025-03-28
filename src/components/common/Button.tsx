@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import { ClipLoader } from "react-spinners";
 
 type ButtonProps = {
   text?: string;
@@ -17,6 +18,7 @@ export function ButtonComponent({
   isLoading = false,
   icon, // Definir valor padrão para o ícone
   className = "",
+  loader,
   ...rest
 }: ButtonProps) {
   return (
@@ -26,20 +28,21 @@ export function ButtonComponent({
       className={`transition duration-200 gap-2 cursor-pointer hover:opacity-80 p-2 flex justify-center text-center items-center ${className}`} // Permite adicionar classes extras
       {...rest}
     >
+      {isLoading && <ClipLoader color="white" size={24} />}
       {!isLoading && text && <span>{text}</span>} {icon}
       {/* Exibe o texto se não estiver carregando */}
     </button>
   );
 };
 
-export function PositiveButton({ text, onClick }: ButtonProps) {
+export function PositiveButton({ text, onClick, isLoading }: ButtonProps) {
   return (
     <button
       onClick={onClick}
       type="submit"
       className="transition duration-200 gap-2 cursor-pointer hover:opacity-80 p-2 flex justify-center text-center items-center bg-red-500 rounded-md text-lg text-white font-semibold w-1/5"
     >
-      {text}
+      {isLoading ? <ClipLoader color="white" size={24} /> : ""}  {!isLoading && text && <span>{text}</span>}
     </button>
   );
 };

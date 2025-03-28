@@ -65,6 +65,7 @@ export default function Home() {
         )}
 
         <ModalComponent
+          loading={false}
           onToDeny={() => setSelectedCard(false)} // Fecha o modal ao cancelar
           title="Alterar endereço"
           trigger={null} // Não precisa do trigger aqui, já que o Card controla a abertura

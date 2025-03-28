@@ -26,6 +26,8 @@ export function useAddress() {
     setError,
     updateName,
     setUpdateName,
+    loading,
+    setLoading,
   } = useContextAddress();
 
   const { data: addressData, isLoading } = useQuery(
@@ -95,10 +97,13 @@ export function useAddress() {
     city: string,
     uf: string
   ) {
-    const valid = validDataAddress(name, cpf, zip_code);
+    try {
+      setLoading(true);
+      const valid = validDataAddress(name, cpf, zip_code);
     if (valid === null) {
       return;
     } else {
+      
       const data = {
         name: name,
         cpf: cpf,
@@ -111,6 +116,15 @@ export function useAddress() {
         },
       };
       createAddressService(data);
+      setZip_code("");
+      setName("");
+      setCpf("");
+    };
+    } catch (error) {
+      toastError("Erro ao enviar dados.");
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -120,7 +134,7 @@ export function useAddress() {
     address: addressData,
     addressList: addressDataList,
     error,
-    loading: isLoading,
+    isLoadingSend: isLoadingSend,
     name,
     setName,
     zip_code,
@@ -130,5 +144,6 @@ export function useAddress() {
     updateName,
     setUpdateName,
     createAddress,
+    loading,
   };
 }

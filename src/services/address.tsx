@@ -1,4 +1,3 @@
-import { AddressProps } from "@/interface/Address";
 import { toastSuccess } from "@/utils/toasts";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";

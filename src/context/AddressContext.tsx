@@ -9,7 +9,7 @@ const AddressProvider = createContext<AddressDataContextProps>(defaultValueConte
 
 const AddressContext = ({ children }: { children: ReactNode }) => {
   const [address, setAddress] = useState<AddressMainProviderProps[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | undefined | boolean | {}>(false);
 
