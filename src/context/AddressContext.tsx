@@ -1,14 +1,14 @@
 import {
-  AddressData,
-  AddressProviderProps,
+  AddressDataContextProps,
+  AddressMainProviderProps,
   defaultValueContextAddress,
-} from "@/interface/AddressContext";
+} from "@/interface/Address";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-const AddressProvider = createContext<AddressData>(defaultValueContextAddress);
+const AddressProvider = createContext<AddressDataContextProps>(defaultValueContextAddress);
 
 const AddressContext = ({ children }: { children: ReactNode }) => {
-  const [address, setAddress] = useState<AddressProviderProps[]>([]);
+  const [address, setAddress] = useState<AddressMainProviderProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | undefined | boolean | {}>(false);
@@ -18,7 +18,7 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   const [cpf, setCpf] = useState("");
 
   // Endereço
-  const [cep, setCep] = useState("");
+  const [zip_code, setZip_code] = useState(""); 
 
   const [updateName, setUpdateName] = useState(name);
   return (
@@ -32,8 +32,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
         setLoading,
         address,
         setAddress,
-        cep,
-        setCep,
+        zip_code,
+        setZip_code,
         cpf,
         setCpf,
         name,

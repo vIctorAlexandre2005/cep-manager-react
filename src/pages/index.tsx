@@ -2,17 +2,15 @@ import { CardWithAddressDetails } from "@/components/Address/Cards";
 import { CreateAddress } from "@/components/Address/Dialogs/createAddress/CreateAddress";
 import Image from "next/image";
 import { TbMapPinHeart } from "react-icons/tb";
-import { locations } from "@/utils/mockAddress";
 import { FaArrowDownLong } from "react-icons/fa6";
 import { Fragment } from "react";
 import { useAddress } from "@/hook/useAddress";
 import { ModalComponent } from "@/components/common/ModalComponent";
 import { UpdateAddressModalContent } from "@/components/Address/Dialogs/updateAddress/UpdateAddressModalContent";
+import { AddressMainProviderProps, AddressProps } from "@/interface/Address";
 
 export default function Home() {
-  const { selectedCard, setSelectedCard } = useAddress();
-
-  console.log(selectedCard);
+  const { selectedCard, setSelectedCard, addressList } = useAddress();
 
   return (
     <div className="flex mt-24 flex-col overflow-auto">
@@ -27,11 +25,11 @@ export default function Home() {
 
       <div className="flex flex-col w-full mt-12 p-6 justify-center">
         <h1 className="font-bold mb-4 flex gap-2 text-3xl items-center">
-          Endereços salvos ({locations?.length})
+          Endereços salvos ({addressList?.length})
           <TbMapPinHeart size={34} color="rgb(239 68 70)" />
         </h1>
 
-        {locations?.length === 0 ? (
+        {addressList?.length === 0 ? (
           <div className="flex justify-center items-center opacity-90 flex-col">
             <Image src={"/world.svg"} width={320} height={320} alt="" />
             <h1 className="font-semibold text-2xl">
@@ -48,11 +46,18 @@ export default function Home() {
             3xl:grid-cols-5
             "
           >
-            {locations.map((location) => (
-              <Fragment key={location.id}>
+            {addressList?.map((location: AddressMainProviderProps) => (
+              <Fragment key={location?.id}>
                 <CardWithAddressDetails
-                  {...location}
-                  onClick={() => setSelectedCard(location)}
+                  city={location?.address?.city}
+                  name={location?.name}
+                  zip_code={location?.address?.zip_code}
+                  cpf={location?.cpf}
+                  district={location?.address?.district}
+                  street={location?.address?.street}
+                  uf={location?.address?.uf}
+                  created_at={location?.created_at}
+                  onClick={() => setSelectedCard(location?.id)}
                 />
               </Fragment>
             ))}

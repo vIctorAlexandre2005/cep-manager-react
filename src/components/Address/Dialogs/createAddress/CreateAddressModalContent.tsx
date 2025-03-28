@@ -7,7 +7,7 @@ import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 
 export function CreateAddressModalContent() {
-  const { error, address, loading, name, setName, cpf, setCpf, cep, setCep } =
+  const { error, address, loading, name, setName, cpf, setCpf, zip_code, setZip_code } =
     useAddress();
 
   return (
@@ -40,8 +40,8 @@ export function CreateAddressModalContent() {
       <div className="w-full">
         <div className="grid grid-cols-2 gap-4 w-full">
           <InputComponent
-            value={cep}
-            onChange={(event) => setCep(event.target.value)}
+            value={zip_code}
+            onChange={(event) => setZip_code(event.target.value)}
             type="number"
             label="CEP"
             placeholder="Preencha seu CEP, ex: 00000-000"

@@ -1,17 +1,22 @@
 import { Dispatch } from "react";
 
-export interface AddressProviderProps {
-    id: string;
-    name: string;
-    cpf: string;
-    cep: string;
+export interface AddressProps {
+    zip_code: string;
     street: string;
     district: string;
     city: string;
     uf: string;
 }
 
-export interface AddressData {
+export interface AddressMainProviderProps {
+    id: string;
+    name: string;
+    cpf: string;
+    address: AddressProps;
+    created_at: string;
+}
+
+export interface AddressDataContextProps {
     selectedCard: number | undefined | boolean | {};
     setSelectedCard: React.Dispatch<React.SetStateAction<number | undefined | boolean | {}>>;
     updateName: string;
@@ -20,17 +25,17 @@ export interface AddressData {
     setError: React.Dispatch<React.SetStateAction<boolean>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    address: AddressProviderProps[];
-    setAddress: Dispatch<React.SetStateAction<AddressProviderProps[]>>;
+    address: AddressMainProviderProps[];
+    setAddress: Dispatch<React.SetStateAction<AddressMainProviderProps[]>>;
     name: string;
     setName: React.Dispatch<React.SetStateAction<string>>;
     cpf: string;
     setCpf: React.Dispatch<React.SetStateAction<string>>;
-    cep: string;
-    setCep: React.Dispatch<React.SetStateAction<string>>;
+    zip_code: string;
+    setZip_code: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const defaultValueContextAddress: AddressData = {
+export const defaultValueContextAddress: AddressDataContextProps = {
     updateName: '',
     setUpdateName: () => {},
     selectedCard: false,
@@ -45,6 +50,6 @@ export const defaultValueContextAddress: AddressData = {
     setName: () => {},
     cpf: '',
     setCpf: () => {},
-    cep: '',
-    setCep: () => {},
+    zip_code: '',
+    setZip_code: () => {},
 };

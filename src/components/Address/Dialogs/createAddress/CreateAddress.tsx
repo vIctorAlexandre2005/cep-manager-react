@@ -12,18 +12,18 @@ import { useAddress } from "@/hook/useAddress";
 
 export function CreateAddress() {
   const { 
-    sendAddress,
     name,
     cpf,
-    cep,
     address,
+    zip_code,
+    createAddress,
   } = useAddress();
 
   return (
     <ModalComponent
       title="Criar novo endereço"
       onToDeny={() => {}}
-      onConfirm={() => sendAddress(name, cpf, cep, address?.logradouro, address?.bairro, address?.localidade, address?.uf)}
+      onConfirm={() => createAddress(name, cpf, zip_code, address.logradouro, address.bairro, address.localidade, address.uf)}
       trigger={
         <ButtonComponent
           className="bg-red-500 rounded-lg p-2 text-xl text-white font-semibold"

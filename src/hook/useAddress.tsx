@@ -1,8 +1,13 @@
 import { useContextAddress } from "@/context/AddressContext";
-import { searchAddressService } from "@/services/address";
+import {
+  createAddressService,
+  getAddressService,
+  searchAddressService,
+  useCreateAddress,
+} from "@/services/address";
 import { toastError, toastSuccess } from "@/utils/toasts";
 import { useEffect } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 
 export function useAddress() {
@@ -13,21 +18,21 @@ export function useAddress() {
     name,
     setName,
     setAddress,
-    cep,
-    setCep,
+    zip_code,
+    setZip_code,
     cpf,
     setCpf,
     error,
     setError,
     updateName,
-    setUpdateName
+    setUpdateName,
   } = useContextAddress();
 
   const { data: addressData, isLoading } = useQuery(
-    ["address", cep],
-    () => searchAddressService(cep),
+    ["address", zip_code],
+    () => searchAddressService(zip_code),
     {
-      enabled: cep?.length === 8,
+      enabled: zip_code?.length === 8,
       retry: false,
       onSuccess: (data) => {
         if (data?.erro === "true") {
@@ -40,17 +45,27 @@ export function useAddress() {
     }
   );
 
-  function validDataAddress(name: string, cpf: string, cep: string) {
+  const { data: addressDataList, isLoading: isLoadingList } = useQuery(
+    ["address"],
+    () => getAddressService(),
+    {
+      onSuccess: (data) => {
+        setAddress(data);
+      },
+    }
+  );
+
+  function validDataAddress(name: string, cpf: string, zip_code: string) {
     // name deve estar preenchido
-    const validName = name?.trim()?.length < 3 || name?.trim()?.length > 60
+    const validName = name?.trim()?.length < 3 || name?.trim()?.length > 60;
     if (validName) {
       toastError("O nome deve conter entre 3 a 60 caracteres.");
       return null;
     }
 
     // cep no formato correto
-    const validCep = cep?.length < 8 || cep?.length > 8;
-    if (validCep) {
+    const validZip_Code = zip_code?.length < 8 || zip_code?.length > 8;
+    if (validZip_Code) {
       toastError("CEP irregular ou não encontrado.");
       return null;
     }
@@ -62,39 +77,40 @@ export function useAddress() {
       return null;
     }
     // nenhum dos campos pode estar vazio
-    if (validName && validCep && validCpf) {
+    if (validName && validZip_Code && validCpf) {
       toastError("Preencha os campos necessários corretamente.");
       return null;
     }
-  };
+  }
 
-  function sendAddress(
+  const { mutate: createAddressService, isLoading: isLoadingSend } =
+    useCreateAddress();
+
+  function createAddress(
     name: string,
     cpf: string,
-    cep: string,
+    zip_code: string,
     street: string,
     district: string,
     city: string,
     uf: string
   ) {
-    const valid = validDataAddress(name, cpf, cep);
-    try {
-      if (valid === null) {
-        return;
-      }
-      const newAddress = {
+    const valid = validDataAddress(name, cpf, zip_code);
+    if (valid === null) {
+      return;
+    } else {
+      const data = {
         name: name,
         cpf: cpf,
-        cep: cep,
-        street: street,
-        district: district,
-        city: city,
-        uf: uf,
+        address: {
+          zip_code: zip_code,
+          street: street,
+          district: district,
+          city: city,
+          uf: uf,
+        },
       };
-      console.log("O que está sendo salvo:", newAddress);
-      toastSuccess("Endereço criado com sucesso!")
-    } catch (error) {
-      console.error("Erro na função sendAddress:", error);
+      createAddressService(data);
     }
   }
 
@@ -102,16 +118,17 @@ export function useAddress() {
     selectedCard,
     setSelectedCard,
     address: addressData,
+    addressList: addressDataList,
     error,
     loading: isLoading,
     name,
     setName,
-    cep,
-    setCep,
+    zip_code,
+    setZip_code,
     cpf,
     setCpf,
-    sendAddress,
     updateName,
     setUpdateName,
+    createAddress,
   };
 }
