@@ -19,6 +19,8 @@ export interface AddressMainProviderProps {
 export interface AddressDataContextProps {
     selectedCard: number | undefined | boolean | {};
     setSelectedCard: React.Dispatch<React.SetStateAction<number | undefined | boolean | {}>>;
+    openModalCreateAddress: boolean;
+    setOpenModalCreateAddress: React.Dispatch<React.SetStateAction<boolean>>;
     updateName: string;
     setUpdateName: React.Dispatch<React.SetStateAction<string>>;
     error: boolean;
@@ -52,4 +54,6 @@ export const defaultValueContextAddress: AddressDataContextProps = {
     setCpf: () => {},
     zip_code: '',
     setZip_code: () => {},
+    openModalCreateAddress: false,
+    setOpenModalCreateAddress: () => {},
 };

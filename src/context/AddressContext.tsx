@@ -12,6 +12,7 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | undefined | boolean | {}>(false);
+  const [openModalCreateAddress, setOpenModalCreateAddress] = useState(false);
 
   // Dados pessoais
   const [name, setName] = useState("");
@@ -40,6 +41,8 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
         setName,
         updateName,
         setUpdateName,
+        openModalCreateAddress,
+        setOpenModalCreateAddress,
       }}
     >
       {children}

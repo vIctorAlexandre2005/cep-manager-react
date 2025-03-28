@@ -11,11 +11,14 @@ export function CreateAddress() {
     zip_code,
     isLoadingSend,
     createAddress,
+    openModalCreateAddress,
+    setOpenModalCreateAddress
   } = useAddress();
   return (
     <ModalComponent
       title="Criar novo endereço"
-      onToDeny={() => {}}
+      onToDeny={() => setOpenModalCreateAddress(false)}
+      open={openModalCreateAddress}
       loading={isLoadingSend}
       classNameTrigger="bg-red-500 cursor-pointer hover:bg-red-600 transition duration-200 rounded-lg flex gap-2 items-center p-2 text-xl text-white font-semibold"
       iconTrigger={<LuMapPinPlus size={24} />}

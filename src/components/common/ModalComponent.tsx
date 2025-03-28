@@ -18,6 +18,7 @@ interface ModalProps {
   onToDeny: () => void;
   onConfirm: () => void;
   open?: number | boolean | undefined | {};
+  setOpen?: React.Dispatch<React.SetStateAction<number | boolean | undefined | {}>>;
   loading: boolean;
   classNameTrigger?: string | undefined;
   textTrigger: string;
@@ -35,7 +36,9 @@ export const ModalComponent = ({
   classNameTrigger,
   textTrigger,
   iconTrigger,
+  setOpen,
 }: ModalProps) => {
+  console.log("open", open);
   return (
     <Dialog open={open as any}>
       <DialogTrigger className={classNameTrigger}>

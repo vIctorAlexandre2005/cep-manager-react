@@ -28,7 +28,11 @@ export function useAddress() {
     setUpdateName,
     loading,
     setLoading,
+    openModalCreateAddress,
+    setOpenModalCreateAddress,
   } = useContextAddress();
+
+  
 
   const removeFormatting = (value: string) => {
     return value.replace(/\D/g, ""); // Remove tudo que não for número
@@ -121,9 +125,6 @@ export function useAddress() {
   ) {
     try {
       setLoading(true);
-
-      
-
       // Validação (você pode manter o código de validação aqui)
       const valid = validDataAddress(name, cleanCpf, cleanZipCode);
       if (valid === null) {
@@ -144,6 +145,7 @@ export function useAddress() {
         console.log("DATA:", data)
         // Envia os dados sem formatação para o serviço
         createAddressService(data);
+        setOpenModalCreateAddress(false);
       }
     } catch (error) {
       toastError("Erro ao enviar dados.");
@@ -173,5 +175,7 @@ export function useAddress() {
     cleanZipCode,
     createAddress,
     loading,
+    openModalCreateAddress,
+    setOpenModalCreateAddress,
   };
 }
