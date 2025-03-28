@@ -20,9 +20,6 @@ export function CreateAddress() {
     loading,
     createAddress,
   } = useAddress();
-
-  console.log('isLoadingSend:', loading);
-
   return (
     <ModalComponent
       title="Criar novo endereço"

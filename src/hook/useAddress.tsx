@@ -7,7 +7,7 @@ import {
 } from "@/services/address";
 import { toastError, toastSuccess } from "@/utils/toasts";
 import { useEffect } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { isError, useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 
 export function useAddress() {
@@ -47,12 +47,19 @@ export function useAddress() {
     }
   );
 
-  const { data: addressDataList, isLoading: isLoadingList } = useQuery(
+  const { data: addressDataList, isLoading: isLoadingList, isError: errorList } = useQuery(
     ["address"],
     () => getAddressService(),
+    
     {
       onSuccess: (data) => {
         setAddress(data);
+      },
+
+      retry: true,
+
+      onError: (error) => {
+        console.error("error", error);
       },
     }
   );
@@ -122,7 +129,7 @@ export function useAddress() {
     };
     } catch (error) {
       toastError("Erro ao enviar dados.");
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -134,6 +141,8 @@ export function useAddress() {
     address: addressData,
     addressList: addressDataList,
     error,
+    isLoadingList: isLoadingList,
+    errorList,
     isLoadingSend: isLoadingSend,
     name,
     setName,

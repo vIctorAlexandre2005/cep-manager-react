@@ -1,5 +1,5 @@
 import { toastSuccess } from "@/utils/toasts";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
 export async function searchAddressService(zip_code: string) {
@@ -8,10 +8,9 @@ export async function searchAddressService(zip_code: string) {
       `https://viacep.com.br/ws/${zip_code}/json/`
     );
     const data = await response.data;
-    console.log(data);
     return data;
   } catch (error) {
-    console.log("Erro na função searchAddress:", error);
+    console.error("Erro na função searchAddress:", error);
   }
 }
 
@@ -19,10 +18,9 @@ export async function getAddressService() {
   try {
     const response = await axios.get(`/api/getCep`);
     const data = await response.data;
-    console.log(data);
     return data;
-  } catch (error) {
-    console.log("Erro na função getAddress:", error);
+  } catch (error: any) {
+    throw error;
   }
 }
 
@@ -37,12 +35,8 @@ export async function createAddressService(dataContent: {
     uf: string;
   };
 }) {
-
-  console.log('data:', dataContent);
-
   try {
     const response = await axios.post("/api/sendAddress", dataContent);
-    console.log('response DATA CONTENT:', response);
     return response.data;
   } catch (error) {
     console.error("Erro na função createAddressService:", error);

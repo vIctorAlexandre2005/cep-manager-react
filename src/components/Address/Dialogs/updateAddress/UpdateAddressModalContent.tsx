@@ -13,8 +13,6 @@ export function UpdateAddressModalContent({ location }: any) {
 
     const [update, setUpdate] = useState(location.name);
 
-    console.log(location.cep.trim());
-
   return (
     <>
       <h1 className="text-2xl font-semibold">Dados pessoais</h1>

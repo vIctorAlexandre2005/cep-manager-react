@@ -8,9 +8,18 @@ import { useAddress } from "@/hook/useAddress";
 import { ModalComponent } from "@/components/common/ModalComponent";
 import { UpdateAddressModalContent } from "@/components/Address/Dialogs/updateAddress/UpdateAddressModalContent";
 import { AddressMainProviderProps, AddressProps } from "@/interface/Address";
+import { ClipLoader } from "react-spinners";
+import { Loader } from "@/components/common/Loader";
 
 export default function Home() {
-  const { selectedCard, setSelectedCard, addressList } = useAddress();
+  const {
+    selectedCard,
+    setSelectedCard,
+    addressList,
+    isLoadingList,
+    errorList,
+  } = useAddress();
+
 
   return (
     <div className="flex mt-24 flex-col overflow-auto">
@@ -28,42 +37,26 @@ export default function Home() {
           Endereços salvos ({addressList?.length})
           <TbMapPinHeart size={34} color="rgb(239 68 70)" />
         </h1>
+        {isLoadingList ? (
+          <div className="flex justify-center items-center">
+            <Loader loader={<ClipLoader color="rgb(239 68 70)" />} />
+          </div>
+        ) : errorList ? ( // <- Aqui estava errado
+          <div className="flex justify-center items-center">
+            <h1 className="font-semibold text-2xl text-red-500">
+              Erro ao carregar os endereços
+            </h1>
+          </div>
+        ) : null}
 
-        {addressList?.length === 0 ? (
+        {addressList?.length === 0 && (
           <div className="flex justify-center items-center opacity-90 flex-col">
             <Image src={"/world.svg"} width={320} height={320} alt="" />
             <h1 className="font-semibold text-2xl">
               Cadastre o seu lugar favorito!
             </h1>
           </div>
-        ) : (
-          <div className="
-            w-full grid items-start gap-4
-            sm:grid-cols-2 sm:gap-8
-            lg:grid-cols-3
-            xl:grid-cols-4 xl:gap-10 
-            2xl:grid-cols-4 2xl:gap-6 
-            3xl:grid-cols-5
-            "
-          >
-            {addressList?.map((location: AddressMainProviderProps) => (
-              <Fragment key={location?.id}>
-                <CardWithAddressDetails
-                  city={location?.address?.city}
-                  name={location?.name}
-                  zip_code={location?.address?.zip_code}
-                  cpf={location?.cpf}
-                  district={location?.address?.district}
-                  street={location?.address?.street}
-                  uf={location?.address?.uf}
-                  created_at={location?.created_at}
-                  onClick={() => setSelectedCard(location?.id)}
-                />
-              </Fragment>
-            ))}
-          </div>
         )}
-
         <ModalComponent
           loading={false}
           onToDeny={() => setSelectedCard(false)} // Fecha o modal ao cancelar

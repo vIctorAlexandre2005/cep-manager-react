@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(data.content);
     res.status(200).json(data?.content);
   } catch (error) {
-    console.log("Erro no servidor", error);
+    console.error("Erro no servidor", error);
+    res.status(500).json({ error: "Erro ao buscar os dados" });
   };
 };
