@@ -70,7 +70,7 @@ export function CardWithAddressDetails({
 
       <footer className="border-t p-2 flex font-semibold items-center gap-2 text-base">
         <FaCalendarCheck size={18} />
-        Criado em {created_at}
+        Criado em {new Date(created_at)?.toLocaleDateString('pt-BR')}
       </footer>
     </div>
   );

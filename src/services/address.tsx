@@ -1,4 +1,4 @@
-import { toastSuccess } from "@/utils/toasts";
+import { toastError, toastSuccess } from "@/utils/toasts";
 import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
@@ -89,7 +89,7 @@ export function useUpdateAddress() {
 
   return useMutation(updateAddressService, {
     onSuccess: () => {
-      toastSuccess("Endereço cadastrado com sucesso!");
+      toastSuccess("Endereço editado com sucesso!");
       queryClient.invalidateQueries(["address"]);
     },
   });

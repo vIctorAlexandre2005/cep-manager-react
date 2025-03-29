@@ -1,7 +1,5 @@
 import { useContextAddress } from "@/context/AddressContext";
 import {
-  createAddressService,
-  deleteAddressService,
   getAddressService,
   getDetailsAddressService,
   searchAddressService,
@@ -10,13 +8,11 @@ import {
   useUpdateAddress,
 } from "@/services/address";
 import { toastError, toastSuccess } from "@/utils/toasts";
-import { useEffect, useState } from "react";
-import { isError, useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "sonner";
+import { useState } from "react";
+import { useQuery } from "react-query";
 
 export function useAddress() {
   const {
-    address,
     selectedCard,
     setSelectedCard,
     name,
@@ -87,12 +83,12 @@ export function useAddress() {
       onSuccess: (data) => {
         setAddress(data);
       },
-      refetchInterval: 120000, // Atualiza a cada 2 minutos
-      refetchOnWindowFocus: false, // Evita refetch automático ao focar na aba
-      staleTime: 60000, // Considera os dados frescos por 1 minuto antes de refazer a busca
-      cacheTime: 300000, // Mantém os dados no cache por 5 minutos antes de serem descartados
-      retry: 2, // Tenta novamente 2 vezes caso ocorra erro
-      refetchOnReconnect: true, // Refaz a requisição caso a internet caia e volte
+      refetchInterval: 120000,
+      refetchOnWindowFocus: false, 
+      staleTime: 60000, 
+      cacheTime: 300000, 
+      retry: 2, 
+      refetchOnReconnect: true, 
       onError: (error: any) => {
         console.error("Erro ao buscar os dados", error);
       },
@@ -200,40 +196,25 @@ export function useAddress() {
   const { mutate: updateAddressService, isLoading: isLoadingUpdate } =
     useUpdateAddress();
 
-  function validUpdateAddress(
-    nameUpdated: string,
-    cpfUpdated: string,
-    zip_codeUpdated: string
-  ) {
+  function validUpdateAddress(cpfUpdated: string) {
+    if (!addressDataList) return null;
+    
+    const cpfExists = addressDataList.some(
+      (address: any) =>
+        removeFormatting(address?.cpf) === cpfUpdated &&
+        address?.id !== selectedCard
+    );
 
-    console.log("nameUpdated:", nameUpdated);
-    console.log("cpfUpdated:", cpfUpdated);
-    console.log("zip_codeUpdated:", zip_codeUpdated);
-
-    const validName = nameUpdated?.trim()?.length < 3 || nameUpdated?.trim()?.length > 60
-    console.log("validName", validName);
-    if (validName) {
-      toastError("O nome deve conter entre 3 a 60 caracteres.");
+    if (cpfExists) {
+      toastError("Esse CPF já está cadastrado em outro endereço.");
       return null;
     }
-
-    const validZip_Code = zip_codeUpdated?.trim()?.length < 8
-    console.log("validZip_Code", validZip_Code);
-    if (validZip_Code) {
-      toastError("CEP irregular ou não encontrado.");
-      return null;
-    }
-
-    const validCpf = cpfUpdated?.trim()?.length < 11 && addressDataList?.find((item: any) => item?.cpf === cpfUpdated);
-    console.log("validCpf", validCpf);
-    if (validCpf) {
-      toastError("Formato do CPF irregular.");
-      return null;
-    }
+    return true;
   }
 
   function updateAddress(name: string, cpf: string, zip_code: string) {
-    const valid = validUpdateAddress(name, cpf, zip_code);
+    const cleanCpfUpdated = removeFormatting(cpf);
+    const valid = validUpdateAddress(cleanCpfUpdated);
 
     try {
       if (valid === null) {
@@ -242,7 +223,7 @@ export function useAddress() {
       const data = {
         id: selectedCard,
         name: name,
-        cpf: cleanCpf,
+        cpf: cleanCpfUpdated,
         address: {
           zip_code: cleanZipCode,
         },
@@ -255,7 +236,11 @@ export function useAddress() {
     }
   }
 
-  const { mutate: deleteAddressService, isLoading: isLoadingDeleteAddressService, isError: isErrorDeleteAddressService } = useDeleteAddress();
+  const {
+    mutate: deleteAddressService,
+    isLoading: isLoadingDeleteAddressService,
+    isError: isErrorDeleteAddressService,
+  } = useDeleteAddress();
 
   async function deleteAddress(id: number) {
     try {

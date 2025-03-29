@@ -28,7 +28,7 @@ interface ModalProps {
   textTrigger: string;
   iconTrigger?: ReactNode;
   isDelete?: boolean;
-  onConfirmDelete: () => void;
+  onConfirmDelete?: () => void;
 }
 
 export const ModalComponent = ({

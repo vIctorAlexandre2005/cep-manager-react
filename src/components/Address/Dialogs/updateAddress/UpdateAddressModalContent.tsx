@@ -1,6 +1,7 @@
 import { InputComponent } from "@/components/common/InputComponent";
 import { Loader } from "@/components/common/Loader";
 import { useAddress } from "@/hook/useAddress";
+import { formatCep, formatCpf } from "@/utils/formatInput";
 import { useState } from "react";
 import { FaCity, FaMapMarkedAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
@@ -10,7 +11,6 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 import { FadeLoader, PacmanLoader, SyncLoader } from "react-spinners";
 
 export function UpdateAddressModalContent() {
-
   const {
     isLoadingAddressDetails,
     success,
@@ -32,7 +32,7 @@ export function UpdateAddressModalContent() {
         <Loader loader={<FadeLoader color="rgb(239 68 70)" />} />
       </div>
     );
-  };
+  }
 
   return (
     <>
@@ -52,7 +52,9 @@ export function UpdateAddressModalContent() {
               />
               <InputComponent
                 value={updateCpf}
-                onChange={(event) => setUpdateCpf(event.target.value)}
+                onChange={(event) =>
+                  setUpdateCpf(formatCpf(event.target.value))
+                }
                 type="text"
                 label="CPF"
                 placeholder="Digite sua senha"
@@ -67,7 +69,9 @@ export function UpdateAddressModalContent() {
             <div className="grid grid-cols-2 gap-4 w-full">
               <InputComponent
                 value={updateZipCode}
-                onChange={(event) => setUpdateZipCode(event.target.value)}
+                onChange={(event) =>
+                  setUpdateZipCode(formatCep(event.target.value))
+                }
                 type="number"
                 label="CEP"
                 placeholder="Preencha seu CEP, ex: 00000-000"
