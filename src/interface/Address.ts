@@ -21,8 +21,6 @@ export interface AddressDataContextProps {
     setSelectedCard: React.Dispatch<React.SetStateAction<number | undefined | boolean | {}>>;
     openModalCreateAddress: boolean;
     setOpenModalCreateAddress: React.Dispatch<React.SetStateAction<boolean>>;
-    updateName: string;
-    setUpdateName: React.Dispatch<React.SetStateAction<string>>;
     error: boolean;
     setError: React.Dispatch<React.SetStateAction<boolean>>;
     loading: boolean;
@@ -35,11 +33,39 @@ export interface AddressDataContextProps {
     setCpf: React.Dispatch<React.SetStateAction<string>>;
     zip_code: string;
     setZip_code: React.Dispatch<React.SetStateAction<string>>;
+
+    // update
+    updateName: string;
+    setUpdateName: React.Dispatch<React.SetStateAction<string>>;
+    updateCpf: string;
+    setUpdateCpf: React.Dispatch<React.SetStateAction<string>>;
+    updateZipCode: string;
+    setUpdateZipCode: React.Dispatch<React.SetStateAction<string>>;
+    updateStreet: string;
+    setUpdateStreet: React.Dispatch<React.SetStateAction<string>>;
+    updateDistrict: string;
+    setUpdateDistrict: React.Dispatch<React.SetStateAction<string>>;
+    updateCity: string;
+    setUpdateCity: React.Dispatch<React.SetStateAction<string>>;
+    updateUf: string;
+    setUpdateUf: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const defaultValueContextAddress: AddressDataContextProps = {
     updateName: '',
     setUpdateName: () => {},
+    updateCpf: '',
+    setUpdateCpf: () => {},
+    updateZipCode: '',
+    setUpdateZipCode: () => {},
+    updateStreet: '',
+    setUpdateStreet: () => {},
+    updateDistrict: '',
+    setUpdateDistrict: () => {},
+    updateCity: '',
+    setUpdateCity: () => {},
+    updateUf: '',
+    setUpdateUf: () => {},
     selectedCard: false,
     setSelectedCard: () => {},
     error: false,

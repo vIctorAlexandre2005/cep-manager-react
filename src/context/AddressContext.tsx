@@ -21,7 +21,14 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
   // Endereço
   const [zip_code, setZip_code] = useState(""); 
 
-  const [updateName, setUpdateName] = useState(name);
+  const [updateName, setUpdateName] = useState("");
+  const [updateCpf, setUpdateCpf] = useState("");
+  const [updateZipCode, setUpdateZipCode] = useState("");
+  const [updateStreet, setUpdateStreet] = useState("");
+  const [updateDistrict, setUpdateDistrict] = useState("");
+  const [updateCity, setUpdateCity] = useState("");
+  const [updateUf, setUpdateUf] = useState("");
+
   return (
     <AddressProvider.Provider
       value={{
@@ -43,6 +50,18 @@ const AddressContext = ({ children }: { children: ReactNode }) => {
         setUpdateName,
         openModalCreateAddress,
         setOpenModalCreateAddress,
+        updateCity,
+        setUpdateCity,
+        updateCpf,
+        setUpdateCpf,
+        updateZipCode,
+        setUpdateZipCode,
+        updateStreet,
+        setUpdateStreet,
+        updateDistrict,
+        setUpdateDistrict,
+        updateUf,
+        setUpdateUf
       }}
     >
       {children}

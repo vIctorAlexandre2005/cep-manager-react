@@ -2,11 +2,12 @@ import { useContextAddress } from "@/context/AddressContext";
 import {
   createAddressService,
   getAddressService,
+  getDetailsAddressService,
   searchAddressService,
   useCreateAddress,
 } from "@/services/address";
 import { toastError, toastSuccess } from "@/utils/toasts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { isError, useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 
@@ -30,9 +31,21 @@ export function useAddress() {
     setLoading,
     openModalCreateAddress,
     setOpenModalCreateAddress,
+    updateCpf,
+    setUpdateCpf,
+    updateZipCode,
+    setUpdateZipCode,
+    updateStreet,
+    setUpdateStreet,
+    updateDistrict,
+    setUpdateDistrict,
+    updateCity,
+    setUpdateCity,
+    updateUf,
+    setUpdateUf,
   } = useContextAddress();
 
-  
+  const [success, setSuccess] = useState(false);
 
   const removeFormatting = (value: string) => {
     return value.replace(/\D/g, ""); // Remove tudo que não for número
@@ -77,6 +90,34 @@ export function useAddress() {
       cacheTime: 300000, // Mantém os dados no cache por 5 minutos antes de serem descartados
       retry: 2, // Tenta novamente 2 vezes caso ocorra erro
       refetchOnReconnect: true, // Refaz a requisição caso a internet caia e volte
+      onError: (error: any) => {
+        console.error("Erro ao buscar os dados", error);
+      },
+    }
+  );
+
+  const {
+    data: addressDetails,
+    isLoading: isLoadingAddressDetails,
+    isError: errorAddressDetails,
+  } = useQuery(
+    ["addressDetails", selectedCard ? selectedCard : null],
+    () => getDetailsAddressService(selectedCard),
+
+    {
+      onSuccess: (data) => {
+        if (data) {
+          setSuccess(true);
+          setUpdateName(data?.name);
+          setUpdateCpf(data?.cpf);
+          setUpdateZipCode(data?.address?.zip_code);
+          setUpdateStreet(data?.address?.street);
+          setUpdateDistrict(data?.address?.district);
+          setUpdateCity(data?.address?.city);
+          setUpdateUf(data?.address?.uf);
+        }
+      },
+      enabled: selectedCard !== null && selectedCard !== undefined,
       onError: (error: any) => {
         console.error("Erro ao buscar os dados", error);
       },
@@ -153,7 +194,7 @@ export function useAddress() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return {
     selectedCard,
@@ -177,5 +218,20 @@ export function useAddress() {
     loading,
     openModalCreateAddress,
     setOpenModalCreateAddress,
+    addressDetails,
+    isLoadingAddressDetails: isLoadingAddressDetails,
+    success,
+    updateCpf,
+    setUpdateCpf,
+    updateZipCode,
+    setUpdateZipCode,
+    updateStreet,
+    setUpdateStreet,
+    updateDistrict,
+    setUpdateDistrict,
+    updateCity,
+    setUpdateCity,
+    updateUf,
+    setUpdateUf,
   };
 }

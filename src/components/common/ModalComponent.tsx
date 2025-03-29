@@ -38,9 +38,8 @@ export const ModalComponent = ({
   iconTrigger,
   setOpen,
 }: ModalProps) => {
-  console.log("open", open);
   return (
-    <Dialog open={open as any}>
+    <Dialog open={open as any} onOpenChange={setOpen}>
       <DialogTrigger className={classNameTrigger}>
         {textTrigger} {iconTrigger}
       </DialogTrigger>

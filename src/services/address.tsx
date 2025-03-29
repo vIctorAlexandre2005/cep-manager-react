@@ -16,11 +16,23 @@ export async function searchAddressService(zip_code: string) {
 
 export async function getAddressService() {
   try {
-    const response = await axios.get(`/api/getCep`);
+    const response = await axios.get(`/api/getAddressData`);
     const data = await response.data;
     return data;
   } catch (error: any) {
-    throw new Error(error?.response?.data?.error || "Erro ao buscar endereços");
+    throw error;
+  }
+};
+
+export async function getDetailsAddressService(id: number | boolean | {} | undefined) {
+  try {
+    if (!id) return;
+    const response = await axios.post(`/api/getDetailsAddress`, id && { id });
+    const data = await response.data;
+    console.log("response", response);
+    return data;
+  } catch (error: any) {
+    console.error("Erro na função getDetailsAddressService:", error);
   }
 }
 

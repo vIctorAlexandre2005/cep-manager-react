@@ -61,6 +61,34 @@ export default function Home() {
             </h1>
           </div>
         )}
+
+        <div
+          className="
+             w-full grid items-start gap-4
+             sm:grid-cols-2 sm:gap-8
+             lg:grid-cols-3
+             xl:grid-cols-4 xl:gap-10 
+             2xl:grid-cols-4 2xl:gap-6 
+             3xl:grid-cols-5
+             "
+        >
+          {addressList?.map((location: AddressMainProviderProps) => (
+            <Fragment key={location?.id}>
+              <CardWithAddressDetails
+                city={location?.address?.city}
+                name={location?.name}
+                zip_code={location?.address?.zip_code}
+                cpf={location?.cpf}
+                district={location?.address?.district}
+                street={location?.address?.street}
+                uf={location?.address?.uf}
+                created_at={location?.created_at}
+                onClick={() => setSelectedCard(location?.id)}
+              />
+            </Fragment>
+          ))}
+        </div>
+
         <ModalComponent
           loading={false}
           onToDeny={() => setSelectedCard(false)} // Fecha o modal ao cancelar
