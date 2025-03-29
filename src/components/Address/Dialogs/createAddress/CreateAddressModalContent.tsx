@@ -1,5 +1,6 @@
 import { InputComponent } from "@/components/common/InputComponent";
 import { useAddress } from "@/hook/useAddress";
+import { formatCep, formatCpf } from "@/utils/formatInput";
 import { FaCity, FaMapMarkedAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiBrazil } from "react-icons/gi";
@@ -9,25 +10,6 @@ import { PiCityBold, PiIdentificationCardFill } from "react-icons/pi";
 export function CreateAddressModalContent() {
   const { error, address, loading, name, setName, cpf, setCpf, zip_code, setZip_code } =
     useAddress();
-
-    const handleNumberInput = (value: string, maxLength: number) => {
-      return value.replace(/\D/g, "").slice(0, maxLength);
-    };
-  
-    // Formatação de CPF (000.000.000-00)
-    const formatCpf = (value: string) => {
-      value = handleNumberInput(value, 11);
-      return value
-        .replace(/^(\d{3})(\d)/, "$1.$2")
-        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
-        .replace(/\.(\d{3})(\d)/, ".$1-$2");
-    };
-  
-    // Formatação de CEP (00000-000)
-    const formatCep = (value: string) => {
-      value = handleNumberInput(value, 8);
-      return value.replace(/^(\d{5})(\d)/, "$1-$2");
-    };
 
   return (
     <>

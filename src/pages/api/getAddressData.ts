@@ -5,7 +5,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const response = await axios.get(`http://localhost:8080/address`);
     const data = await response.data;
-    console.log(data.content);
     res.status(200).json(data?.content);
   } catch (error) {
     console.error("Erro no servidor", error);

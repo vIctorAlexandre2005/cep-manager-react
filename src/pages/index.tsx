@@ -19,6 +19,12 @@ export default function Home() {
     addressList,
     isLoadingList,
     errorList,
+    updateAddress,
+    updateName,
+    updateCpf,
+    updateZipCode,
+    isLoadingUpdate,
+    deleteAddress,
   } = useAddress();
 
   const isAddressListEmpty = useMemo(
@@ -90,16 +96,20 @@ export default function Home() {
         </div>
 
         <ModalComponent
-          loading={false}
+          loading={isLoadingUpdate}
           onToDeny={() => setSelectedCard(false)} // Fecha o modal ao cancelar
           title="Alterar endereço"
           textTrigger=""
-          onConfirm={() => {}}
+          onConfirm={() => updateAddress(updateName, updateCpf, updateZipCode)}
           textPositiveButton="Atualizar"
           open={selectedCard}
+          isDelete={true}
+          onConfirmDelete={() => {
+            deleteAddress(selectedCard as number);
+          }}
         >
           {selectedCard && (
-            <UpdateAddressModalContent location={selectedCard} />
+            <UpdateAddressModalContent />
           )}
         </ModalComponent>
       </div>

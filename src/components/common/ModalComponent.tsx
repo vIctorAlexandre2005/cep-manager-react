@@ -1,6 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -10,6 +11,7 @@ import {
 import { LuMapPinPlus } from "react-icons/lu";
 import { ButtonComponent, NegativeButton, PositiveButton } from "./Button";
 import { ClassNameValue } from "tailwind-merge";
+import { BiTrash } from "react-icons/bi";
 
 interface ModalProps {
   title: string;
@@ -18,11 +20,15 @@ interface ModalProps {
   onToDeny: () => void;
   onConfirm: () => void;
   open?: number | boolean | undefined | {};
-  setOpen?: React.Dispatch<React.SetStateAction<number | boolean | undefined | {}>>;
+  setOpen?: React.Dispatch<
+    React.SetStateAction<number | boolean | undefined | {}>
+  >;
   loading: boolean;
   classNameTrigger?: string | undefined;
   textTrigger: string;
   iconTrigger?: ReactNode;
+  isDelete?: boolean;
+  onConfirmDelete: () => void;
 }
 
 export const ModalComponent = ({
@@ -37,6 +43,8 @@ export const ModalComponent = ({
   textTrigger,
   iconTrigger,
   setOpen,
+  isDelete,
+  onConfirmDelete
 }: ModalProps) => {
   return (
     <Dialog open={open as any} onOpenChange={setOpen}>
@@ -44,8 +52,20 @@ export const ModalComponent = ({
         {textTrigger} {iconTrigger}
       </DialogTrigger>
       <DialogContent className="xs:max-w-[600px] xs:max-h-full flex flex-col md:max-w-[800px] overflow-auto">
-        <DialogHeader>
-          <DialogTitle className="text-3xl text-left font-bold">{title}</DialogTitle>
+        <DialogHeader className="mt-4">
+          <div className={isDelete ? "flex justify-between items-center" : ""}>
+            <DialogTitle className="text-3xl text-left font-bold">
+              {title}
+            </DialogTitle>
+            {isDelete && (
+              <ButtonComponent
+                className="bg-red-200 font-bold text-red-500 rounded-lg"
+                text="Excluir"
+                icon={<BiTrash size={20} />}
+                onClick={onConfirmDelete}
+              />
+            )}
+          </div>
         </DialogHeader>
         {children}
         <DialogFooter>

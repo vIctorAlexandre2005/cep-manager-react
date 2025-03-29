@@ -1,10 +1,13 @@
 import { useContextAddress } from "@/context/AddressContext";
 import {
   createAddressService,
+  deleteAddressService,
   getAddressService,
   getDetailsAddressService,
   searchAddressService,
   useCreateAddress,
+  useDeleteAddress,
+  useUpdateAddress,
 } from "@/services/address";
 import { toastError, toastSuccess } from "@/utils/toasts";
 import { useEffect, useState } from "react";
@@ -182,8 +185,6 @@ export function useAddress() {
             uf: uf,
           },
         };
-
-        console.log("DATA:", data)
         // Envia os dados sem formatação para o serviço
         createAddressService(data);
         setOpenModalCreateAddress(false);
@@ -194,7 +195,78 @@ export function useAddress() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  const { mutate: updateAddressService, isLoading: isLoadingUpdate } =
+    useUpdateAddress();
+
+  function validUpdateAddress(
+    nameUpdated: string,
+    cpfUpdated: string,
+    zip_codeUpdated: string
+  ) {
+
+    console.log("nameUpdated:", nameUpdated);
+    console.log("cpfUpdated:", cpfUpdated);
+    console.log("zip_codeUpdated:", zip_codeUpdated);
+
+    const validName = nameUpdated?.trim()?.length < 3 || nameUpdated?.trim()?.length > 60
+    console.log("validName", validName);
+    if (validName) {
+      toastError("O nome deve conter entre 3 a 60 caracteres.");
+      return null;
+    }
+
+    const validZip_Code = zip_codeUpdated?.trim()?.length < 8
+    console.log("validZip_Code", validZip_Code);
+    if (validZip_Code) {
+      toastError("CEP irregular ou não encontrado.");
+      return null;
+    }
+
+    const validCpf = cpfUpdated?.trim()?.length < 11 && addressDataList?.find((item: any) => item?.cpf === cpfUpdated);
+    console.log("validCpf", validCpf);
+    if (validCpf) {
+      toastError("Formato do CPF irregular.");
+      return null;
+    }
+  }
+
+  function updateAddress(name: string, cpf: string, zip_code: string) {
+    const valid = validUpdateAddress(name, cpf, zip_code);
+
+    try {
+      if (valid === null) {
+        return;
+      }
+      const data = {
+        id: selectedCard,
+        name: name,
+        cpf: cleanCpf,
+        address: {
+          zip_code: cleanZipCode,
+        },
+      };
+      // Envia os dados sem formatação para o serviço
+      updateAddressService(data);
+    } catch (error) {
+      toastError("Erro ao enviar dados.");
+      console.error(error);
+    }
+  }
+
+  const { mutate: deleteAddressService, isLoading: isLoadingDeleteAddressService, isError: isErrorDeleteAddressService } = useDeleteAddress();
+
+  async function deleteAddress(id: number) {
+    try {
+      deleteAddressService(id);
+      toastSuccess("Endereço excluido com sucesso!");
+      setSelectedCard(false);
+    } catch (error) {
+      toastError("Erro ao enviar dados.");
+      console.error(error);
+    }
+  }
 
   return {
     selectedCard,
@@ -233,5 +305,8 @@ export function useAddress() {
     setUpdateCity,
     updateUf,
     setUpdateUf,
+    updateAddress,
+    isLoadingUpdate,
+    deleteAddress,
   };
 }
